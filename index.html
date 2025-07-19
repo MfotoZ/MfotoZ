@@ -1,12 +1,128 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>mfotoz</title>
-  </head>
-  <body>
-    <h1>Dobrodošli na mfotoz.com 👋</h1>
-    <p>To je moja prva spletna stran, postavljena z GitHub Pages!</p>
-    <p>Več vsebine kmalu...</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mfotoz – Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background-color: #f5f5f5;
+      color: #111;
+    }
+
+    header {
+      padding: 2rem;
+      text-align: center;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-weight: 700;
+      margin: 0;
+    }
+
+    header p {
+      font-weight: 300;
+      margin-top: 0.5rem;
+      color: #666;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background-color: #eee;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .social {
+      margin-top: 1rem;
+    }
+
+    .social a {
+      margin: 0 1rem;
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>mfotoz</h1>
+    <p>Fotografski portfolio</p>
+    <nav>
+      <a href="#projekti">Projekti</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Dobrodošli v mojem svetu skozi objektiv</h2>
+    <p>Raziskujem svet, svetlobo in trenutke – ujeti v eni sliki.</p>
+  </section>
+
+  <section class="gallery" id="projekti">
+    <!-- Zamenjaj spodnje slike s tvojimi -->
+    <img src="https://placehold.co/600x400" alt="Projekt 1" />
+    <img src="https://placehold.co/600x400" alt="Projekt 2" />
+    <img src="https://placehold.co/600x400" alt="Projekt 3" />
+    <img src="https://placehold.co/600x400" alt="Projekt 4" />
+  </section>
+
+  <footer id="kontakt">
+    <p>Piši mi na: <a href="mailto:tvojemail@gmail.com" style="color:#fff;">tvojemail@gmail.com</a></p>
+    
+    <div class="social">
+      <!-- Dodaj svoje povezave -->
+      <a href="https://instagram.com/tvojprofil" target="_blank">Instagram</a>
+      <a href="https://github.com/tvojprofil" target="_blank">GitHub</a>
+    </div>
+
+    <p style="margin-top: 2rem;">© 2025 mfotoz.com</p>
+  </footer>
+
+</body>
 </html>
