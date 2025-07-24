@@ -4,94 +4,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Video portfolio of Matija Zavasnik - mfotoz.com" />
-  <title>Videos | MfotoZ</title>
+  <meta name="description" content="Photography portfolio of Matija Zavasnik - mfotoz.com" />
+  <title>MfotoZ - Photos</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
-    body {
-      background-color: #f4f4f4;
-      color: #222;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem;
-      background-color: #ffffff;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
-
-    .section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .video-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .video-container iframe {
-      width: 100%;
-      height: 200px;
-      border-radius: 8px;
-    }
-
-    footer {
-      padding: 2rem;
-      text-align: center;
-      background-color: #fff;
-      font-size: 0.9rem;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-  <header>
-    <div class="logo">MfotoZ</div>
-    <nav>
-      <a href="index.html">Photos</a>
-      <a href="video.html">Videos</a>
-      <a href="about.html">Me</a>
-    </nav>
-  </header>
-
-  <section class="section">
-    <h2>My Videos</h2>
-    <div class="video-container">
-      <!-- Zamenjaj YouTube povezave s svojimi -->
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" frameborder="0" allowfullscreen></iframe>
-      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_URL" title="Video 2" frameborder="0" allowfullscreen></iframe>
+<header>
+  <div class="container">
+    <div class="header-left">
+      <a href="index.html" class="logo">
+        <img src="images/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
+      </a>
+      <a href="https://instagram.com/m.foto.z" target="_blank">
+        <img src="images/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
+      </a>
+      <a href="https://mail.google.com/mail/?view=cm&to=matijafotoz@gmail.com" target="_blank">
+        <img src="images/mfotoz-logo-mail.png" alt="Email" class="icon" />
+      </a>
     </div>
-  </section>
 
-  <footer>
+ <!-- Klasična navigacija, ki jo skrijemo na telefon -->
+    <nav class="header-right">
+      <a href="index.html">PHOTOS</a>
+      <a href="video.html">VIDEOS</a>
+      <a href="about.html">ME</a>
+    </nav>
+
+    <!-- Hamburger meni za telefone -->
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Overlay meni -->
+<div class="mobile-menu-overlay" aria-hidden="true">
+  <nav class="mobile-menu">
+    <a href="index.html">PHOTOS</a>
+    <a href="video.html">VIDEOS</a>
+    <a href="about.html">ME</a>
+  </nav>
+</div>
+<main>
+  <div class="section">
+    <div class="gallery">
+
+      <div class="image-wrapper" onclick="openModal('videos/Vrhnika.mov')">
+        <video muted playsinline
+               style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;">
+          <source src="videos/Vrhnika.mov" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- CINEMA MODAL -->
+<div id="videoModal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <video id="modalVideo" controls autoplay></video>
+  </div>
+</div>
+
+
+<footer>
     &copy; 2025 mfotoz.com | Matija Zavasnik
-  </footer>
+</footer>
+
+ <script>
+  function openModal(videoSrc) {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("modalVideo");
+    video.src = videoSrc;
+    modal.style.display = "flex";
+    video.play();
+  }
+
+  function closeModal() {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("modalVideo");
+    modal.style.display = "none";
+    video.pause();
+    video.src = ""; // očisti vir
+  }
+
+  function toggleFullscreen() {
+    const video = document.getElementById("modalVideo");
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
+    }
+  }
+</script>
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu-overlay');
+
+  hamburger.addEventListener('click', () => {
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+    hamburger.setAttribute('aria-expanded', !expanded);
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.setAttribute('aria-expanded', false);
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    });
+  });
+
+  mobileMenu.addEventListener('click', e => {
+    if (e.target === mobileMenu) {
+      hamburger.setAttribute('aria-expanded', false);
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    }
+  });
+
+const images = document.querySelectorAll('.image-wrapper');
+
+images.forEach(img => {
+  let pressTimer;
+
+  img.addEventListener('touchstart', () => {
+    pressTimer = setTimeout(() => {
+      img.classList.add('long-press');
+    }, 200); // 200 ms držanja
+  });
+
+  img.addEventListener('touchend', () => {
+    clearTimeout(pressTimer);
+    img.classList.remove('long-press');
+  });
+
+  img.addEventListener('touchcancel', () => {
+    clearTimeout(pressTimer);
+    img.classList.remove('long-press');
+  });
+});
+
+</script>
+
+
 </body>
 
 </html>
