@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet" />
+  <!-- Fancybox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 </head>
 
 <body>
@@ -55,42 +57,36 @@
  <div class="section">
    <div class="gallery">
 
-<div id="lightbox-modal" class="modal">
-  <div class="modal-content">
-    <button class="close-btn" id="closeLightbox">&times;</button>
-    <img id="lightbox-image" src="" alt="Slideshow" style="width:100%; border-radius: 8px;">
-    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
-      <button id="prevSlide" style="background:none; border:none; font-size:2rem; color:white; cursor:pointer">&#10094;</button>
-      <button id="nextSlide" style="background:none; border:none; font-size:2rem; color:white; cursor:pointer">&#10095;</button>
-    </div>
-    <div id="thumbnail-bar" style="display:flex; flex-wrap:wrap; gap:4px; margin-top:1rem; justify-content:center;"></div>
-  </div>
-</div>
-
-    <div class="image-wrapper">
-      <img src="images/IMG_1794.jpg" alt="Photo 1" />
-      <div class="photo-title">Leopold prvi</div>
-    </div>
-    <div class="image-wrapper">
-      <img src="images/IMG_1826.jpg" alt="Photo 2" />
-      <div class="photo-title">Ogled zadaj</div>
-    </div>
-    <div class="image-wrapper">
-      <img src="images/IMG_1837.jpg" alt="Photo 3" />
-      <div class="photo-title">Leopold</div>
-    </div>
-    <div class="image-wrapper">
-      <img src="images/IMG_2055.jpg" alt="Photo 4" />
-      <div class="photo-title">Tabu</div>
-    </div>
-    <div class="image-wrapper">
-      <img src="images/IMG_2242.jpg" alt="Photo 5" />
-      <div class="photo-title">Ljudje</div>
-    </div>
-    <div class="image-wrapper">
-      <img src="images/IMG_2321.jpg" alt="Photo 6" />
-      <div class="photo-title">Skater</div>
-    </div>
+   <div class="image-wrapper">
+     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_1774.jpg">
+       <img src="images/IMG_1794.jpg" alt="Pogled" style="cursor:pointer;" />
+     </a>
+     <div class="photo-title">Putafest diaprojekcija</div>
+     <!-- Hidden gallery images for Fancybox group -->
+     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_1779.jpg" style="display:none;"></a>
+     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_2006.jpg" style="display:none;"></a>
+     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_2219.jpg" style="display:none;"></a>
+   </div>
+   <div class="image-wrapper">
+     <img src="images/IMG_1826.jpg" alt="Photo 2" />
+     <div class="photo-title">Ogled zadaj</div>
+   </div>
+   <div class="image-wrapper">
+     <img src="images/IMG_1837.jpg" alt="Photo 3" />
+     <div class="photo-title">Leopold</div>
+   </div>
+   <div class="image-wrapper">
+     <img src="images/IMG_2055.jpg" alt="Photo 4" />
+     <div class="photo-title">Tabu</div>
+   </div>
+   <div class="image-wrapper">
+     <img src="images/IMG_2242.jpg" alt="Photo 5" />
+     <div class="photo-title">Ljudje</div>
+   </div>
+   <div class="image-wrapper">
+     <img src="images/IMG_2321.jpg" alt="Photo 6" />
+     <div class="photo-title">Skater</div>
+   </div>
 
    </div> <!-- /.gallery -->
  </div> <!-- /.section -->
@@ -111,7 +107,47 @@
     mobileMenu.classList.toggle('active');
   });
 
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.setAttribute('aria-expanded', false);
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    });
+  });
+
+  mobileMenu.addEventListener('click', e => {
+    if (e.target === mobileMenu) {
+      hamburger.setAttribute('aria-expanded', false);
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+    }
+  });
+
+const images = document.querySelectorAll('.image-wrapper');
+
+images.forEach(img => {
+  let pressTimer;
+
+  img.addEventListener('touchstart', () => {
+    pressTimer = setTimeout(() => {
+      img.classList.add('long-press');
+    }, 200); // 200 ms držanja
+  });
+
+  img.addEventListener('touchend', () => {
+    clearTimeout(pressTimer);
+    img.classList.remove('long-press');
+  });
+
+  img.addEventListener('touchcancel', () => {
+    clearTimeout(pressTimer);
+    img.classList.remove('long-press');
+  });
+});
+
 </script>
+<!-- Add Fancybox JS before closing body tag -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 </body>
 
 </html>
