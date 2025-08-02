@@ -3,12 +3,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Antonio', sans-serif;
 }
 
 /* Telo strani */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Antonio', sans-serif;
   background: linear-gradient(to bottom, #000000 0%, #1a1a1a 50%, #000000 100%);
   color: white;
   min-height: 100vh;
@@ -88,14 +88,31 @@ nav a:hover {
 }
 
 .image-wrapper {
+  width: 26%;
+  display: inline-block;
   position: relative;
   overflow: hidden;
-}
+  vertical-align: top;
+  }
 
 .image-wrapper img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+
+
+/* Poskrbi, da se slike lepo prilagodijo na manjših zaslonih */
+@media (max-width: 900px) {
+  .image-wrapper {
+    width: 48%;
+  }
+}
+@media (max-width: 600px) {
+  .image-wrapper {
+    width: 98%;
+  }
 }
 
 .image-wrapper .photo-title {
@@ -109,6 +126,7 @@ nav a:hover {
   font-size: 1.5rem;
   text-align: center;
   z-index: 2;
+
 }
 
 .image-wrapper.long-press .photo-title {
@@ -122,9 +140,7 @@ nav a:hover {
   transform: translate(-50%, -50%) translateY(0); /* pride nazaj na točno sredino */
 }
 
-.image-wrapper:hover .photo-title {
-  opacity: 1;
-}
+
 
 /* Bel prosojen overlay */
 .image-wrapper::before {
@@ -145,9 +161,6 @@ nav a:hover {
 }
 
 .gallery img {
-  width: 100%;
-  height: auto;
-  display: block;
   object-fit: cover;
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
@@ -426,7 +439,7 @@ footer {
   }
 
   .gallery {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 4px;
   }
 
@@ -645,4 +658,10 @@ body {
 
 .hamburger.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.fancybox__thumbs .fancybox__thumb {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 4px;
 }
