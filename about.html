@@ -1,143 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Photography portfolio of Matija Zavasnik - mfotoz.com" />
-  <title>MfotoZ - About</title>
+  <title>MfotoZ - Photos</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Crimson&family=Cormorant+Garamond:wght@300&family=Inter:wght@300;600&display=swap"
-    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
   <link href="https://fonts.googleapis.com/css2?family=Antonio:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;600&display=swap" rel="stylesheet">
-
-
-  <style>
-    /* Osnovni layout */
-    .hero img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .about-contact-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6rem;
-      padding: 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* Leva (opis) in desna (kontakt) stran */
-    .about-text,
-    .contact-form {
-      flex: 1 1 300px;
-      /* odstranjeno min-width za boljšo odzivnost */
-    }
-
-    /* TEKST V OPISU */
-    .about-text {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      font-family: Antonio, sans-serif;
-      font-size: 1.1rem;
-      color: white;
-    }
-
-    .about-text h2 {
-      font-family: 'Crimson', serif;
-      font-size: 3.2rem;
-      margin-bottom: 0.4rem;
-      text-align: center;
-    }
-
-    .about-text h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .about-text p {
-      font-family: 'Antonio', sans-serif;
-      font-weight: 300;
-      font-size: 1rem;
-      color: white;
-      line-height: 1.5;
-    }
-
-    /* KONTAKTNI OBRAZEC */
-    .contact-form form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .contact-form label {
-      margin-top: 1rem;
-      margin-bottom: 0.3rem;
-      font-weight: 600;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      padding: 0.5rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    /* Responsive za manjše ekrane */
-    @media (max-width: 700px) {
-      .about-contact-container {
-        flex-direction: column;
-        padding: 1rem;
-        max-width: 100%;
-      }
-
-      .about-text,
-      .contact-form {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 0 1rem;
-        text-align: center;
-        box-sizing: border-box;
-        min-width: auto; /* odstranimo minimalno širino */
-        font-size: 1rem; /* po želji manjša pisava */
-      }
-    }
-  </style>
 </head>
-
 <body>
   <header>
     <div class="container">
       <div class="header-left">
         <a href="index.html" class="logo">
-          <img src="images/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
+          <img src="images/logo/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
         </a>
         <a href="https://instagram.com/m.foto.z" target="_blank">
-          <img src="images/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
+          <img src="images/logo/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
         </a>
         <a href="https://mail.google.com/mail/?view=cm&to=matijafotoz@gmail.com" target="_blank">
-          <img src="images/mfotoz-logo-mail.png" alt="Email" class="icon" />
+          <img src="images/logo/mfotoz-logo-mail.png" alt="Email" class="icon" />
         </a>
       </div>
-    <!-- Klasična navigacija, ki jo skrijemo na telefon -->
+
+ <!-- Klasična navigacija, ki jo skrijemo na telefon -->
     <nav class="header-right">
       <a href="index.html">PHOTOS</a>
       <a href="video.html">VIDEOS</a>
@@ -151,9 +39,9 @@
       <span></span>
     </button>
   </div>
-</header>
+  </header>
 
-<!-- Overlay meni -->
+  <!-- Overlay meni -->
 <div class="mobile-menu-overlay" aria-hidden="true">
   <nav class="mobile-menu">
     <a href="index.html">PHOTOS</a>
@@ -161,74 +49,74 @@
     <a href="about.html">ME</a>
   </nav>
 </div>
-<main>
+
+  <main>
+    <div class="section">
+      <div class="gallery">
+        <!-- Remove the Putafest_2023 main preview, thumbnail row, and hidden links from the main gallery. Only keep other galleries and content. -->
 
 
-  <section class="hero">
-    <img src="images/about-me.jpg" alt="JAZ" />
-  </section>
-
-  <section class="about-contact-container">
-    <div class="about-text">
-      <h2>Matija Zavasnik</h2>
-      <h3>FREELANCE PHOTOGRAPHER AND VIDEOGRAPHER BASED IN SLOVENIA</h3>
-      <p>
-        I am a student at the Faculty of Sport, where I pursue my main passion – sports. However, I have been fascinated by photography since I was a child. Alongside my technical skills and creativity in photography, I am known for my kindness, openness, and good communication. I am always ready to listen, understand others’ needs, and adapt to different situations, as I believe these qualities are key to successful collaboration and creating authentic, emotionally impactful photographs.
-      </p>
-      <p>
-        I believe that a single photograph can tell a thousand words, which is why I prefer photographing over writing. So rather than reading, take a look at my albums and the stories they tell.
-      </p>
+      
+ 
     </div>
-
-    <div class="contact-form">
-      <h2>Contact Me</h2>
-      <form action="mailto:matijafotoz@gmail.com" method="POST" enctype="text/plain"
-        onsubmit="alert('This will open your email client to send the message.');">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="Name" required />
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="Email" required />
-
-        <label for="message">Message</label>
-        <textarea id="message" name="Message" required></textarea>
-
-        <button type="submit">Submit</button>
-      </form>
+    <div class="image-wrapper">
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1794.jpg">
+        <img src="images/Putafest_2023/IMG_1794.jpg" alt="Pütafest 2023 preview" />
+        <div class="photo-title">Pütafest 2023</div>
+      </a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1822.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1826.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1837.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1893.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1958.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2006.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2055.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2219.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2242.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2321.jpg" style="display:none;"></a>
     </div>
-  </section>
+    <div class="image-wrapper">
+      <a data-fancybox="galerija" href="images/Indija/IMG_8688.JPG">
+        <img src="images/Indija/IMG_8688.JPG" alt="Indija preview" />
+        <div class="photo-title">Indija</div>
+      </a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_0066.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_0068.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8524.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8679.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8867.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8940.JPG" style="display:none;"></a>
+    </div>
+      </div>
 
-  <footer>
-    &copy; 2025 mfotoz.com | Matija Zavasnik
-  </footer>
+      <!-- End Putafest Gallery Thumbnails Row -->
+    </div>
+  </main>
+
+  <footer>&copy; 2025 mfotoz.com | Matija Zavasnik</footer>
+
+  
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+<script>
+  Fancybox.bind('[data-fancybox]', {
+    Thumbs: {
+      autoStart: true, // trak s predogledi bo odprt takoj
+      type: "classic"  // classic = horizontalni carousel
+    },
+    infinite: true     // omogoči kroženje (carousel loop)
+  });
+</script>
+
 
 <script>
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu-overlay');
-
-  hamburger.addEventListener('click', () => {
-    const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-    hamburger.setAttribute('aria-expanded', !expanded);
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
+  Fancybox.bind('[data-fancybox="galerija"]', {
+    Thumbs: {
+      autoStart: true,
+      type: "classic"
+    },
+    infinite: true
   });
-
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.setAttribute('aria-expanded', false);
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-    });
-  });
-
-mobileMenu.addEventListener('click', e => {
-    if (e.target === mobileMenu) {
-      hamburger.setAttribute('aria-expanded', false);
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-    }
-  });
-
 </script>
 
 <script>
@@ -258,31 +146,31 @@ mobileMenu.addEventListener('click', e => {
     }
   });
 
-const images = document.querySelectorAll('.image-wrapper');
-
-images.forEach(img => {
+document.querySelectorAll('.image-wrapper').forEach(wrapper => {
   let pressTimer;
 
-  img.addEventListener('touchstart', () => {
+  wrapper.addEventListener('touchstart', function(e) {
+    // Odstrani long-press iz vseh
+    document.querySelectorAll('.image-wrapper.long-press').forEach(el => el.classList.remove('long-press'));
     pressTimer = setTimeout(() => {
-      img.classList.add('long-press');
-    }, 200); // 200 ms držanja
+      wrapper.classList.add('long-press');
+    }, 400); // 400ms za long-press
   });
 
-  img.addEventListener('touchend', () => {
+  wrapper.addEventListener('touchend', function(e) {
     clearTimeout(pressTimer);
-    img.classList.remove('long-press');
+    // Odstrani long-press iz vseh
+    document.querySelectorAll('.image-wrapper.long-press').forEach(el => el.classList.remove('long-press'));
   });
 
-  img.addEventListener('touchcancel', () => {
+  // Za varnost: odstrani long-press ob scrollu ali dotiku drugje
+  wrapper.addEventListener('touchmove', function(e) {
     clearTimeout(pressTimer);
-    img.classList.remove('long-press');
+    document.querySelectorAll('.image-wrapper.long-press').forEach(el => el.classList.remove('long-press'));
   });
 });
-
 </script>
 
 
 </body>
-
 </html>
