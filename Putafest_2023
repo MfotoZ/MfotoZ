@@ -12,13 +12,13 @@
     <div class="container">
       <div class="header-left">
         <a href="index.html" class="logo">
-          <img src="images/logo/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
+          <img src="logo/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
         </a>
         <a href="https://instagram.com/m.foto.z" target="_blank">
-          <img src="images/logo/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
+          <img src="logo/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
         </a>
         <a href="https://mail.google.com/mail/?view=cm&to=matijafotoz@gmail.com" target="_blank">
-          <img src="images/logo/mfotoz-logo-mail.png" alt="Email" class="icon" />
+          <img src="logo/mfotoz-logo-mail.png" alt="Email" class="icon" />
         </a>
       </div>
       <nav class="header-right">
@@ -32,24 +32,36 @@
     <div class="section">
       <h2 style="text-align:center; margin-bottom:2rem;">Pütafest 2023 Gallery</h2>
       <div style="display:flex; justify-content:center;">
-        <a data-fancybox="putafest" data-src="#putafest-gallery" href="javascript:;">
-          <img src="images/Putafest_2023/IMG_1794.jpg" alt="Putafest 1794" style="max-width: 500px; width:100%; height:auto; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.4);" />
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_1794.jpg">
+          <img src="Putafest_2023/IMG_1794.jpg" alt="Putafest 1794" style="max-width: 500px; width:100%; height:auto; border-radius:8px; box-shadow:0 4px 16px rgba(0,0,0,0.4);" />
+          <div class="photo-title">Pütafest 2023</div>
         </a>
+        <!-- Dodaj ostale slike kot skrite <a> za carousel -->
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_1822.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_1826.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_1837.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_1893.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_1958.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_2006.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_2055.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_2219.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_2242.jpg" style="display:none;"></a>
+        <a data-fancybox="putafest" href="Putafest_2023/IMG_2321.jpg" style="display:none;"></a>
       </div>
       <div style="display:none;">
         <div id="putafest-gallery">
           <div class="gallery">
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_1794.jpg"><img src="images/Putafest_2023/IMG_1794.jpg" alt="Putafest 1794" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_1822.jpg"><img src="images/Putafest_2023/IMG_1822.jpg" alt="Putafest 1822" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_1826.jpg"><img src="images/Putafest_2023/IMG_1826.jpg" alt="Putafest 1826" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_1837.jpg"><img src="images/Putafest_2023/IMG_1837.jpg" alt="Putafest 1837" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_1893.jpg"><img src="images/Putafest_2023/IMG_1893.jpg" alt="Putafest 1893" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_1958.jpg"><img src="images/Putafest_2023/IMG_1958.jpg" alt="Putafest 1958" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_2006.jpg"><img src="images/Putafest_2023/IMG_2006.jpg" alt="Putafest 2006" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_2055.jpg"><img src="images/Putafest_2023/IMG_2055.jpg" alt="Putafest 2055" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_2219.jpg"><img src="images/Putafest_2023/IMG_2219.jpg" alt="Putafest 2219" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_2242.jpg"><img src="images/Putafest_2023/IMG_2242.jpg" alt="Putafest 2242" /></a>
-            <a data-fancybox="putafest-inner" href="images/Putafest_2023/IMG_2321.jpg"><img src="images/Putafest_2023/IMG_2321.jpg" alt="Putafest 2321" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_1794.jpg"><img src="Putafest_2023/IMG_1794.jpg" alt="Putafest 1794" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_1822.jpg"><img src="Putafest_2023/IMG_1822.jpg" alt="Putafest 1822" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_1826.jpg"><img src="Putafest_2023/IMG_1826.jpg" alt="Putafest 1826" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_1837.jpg"><img src="Putafest_2023/IMG_1837.jpg" alt="Putafest 1837" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_1893.jpg"><img src="Putafest_2023/IMG_1893.jpg" alt="Putafest 1893" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_1958.jpg"><img src="Putafest_2023/IMG_1958.jpg" alt="Putafest 1958" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_2006.jpg"><img src="Putafest_2023/IMG_2006.jpg" alt="Putafest 2006" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_2055.jpg"><img src="Putafest_2023/IMG_2055.jpg" alt="Putafest 2055" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_2219.jpg"><img src="Putafest_2023/IMG_2219.jpg" alt="Putafest 2219" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_2242.jpg"><img src="Putafest_2023/IMG_2242.jpg" alt="Putafest 2242" /></a>
+            <a data-fancybox="putafest-inner" href="Putafest_2023/IMG_2321.jpg"><img src="Putafest_2023/IMG_2321.jpg" alt="Putafest 2321" /></a>
           </div>
         </div>
       </div>
@@ -62,17 +74,17 @@
           on: {
             reveal: (fancybox, slide) => {
               Fancybox.show([
-                { src: 'images/Putafest_2023/IMG_1794.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_1822.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_1826.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_1837.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_1893.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_1958.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_2006.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_2055.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_2219.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_2242.jpg', type: 'image' },
-                { src: 'images/Putafest_2023/IMG_2321.jpg', type: 'image' }
+                { src: 'Putafest_2023/IMG_1794.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_1822.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_1826.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_1837.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_1893.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_1958.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_2006.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_2055.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_2219.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_2242.jpg', type: 'image' },
+                { src: 'Putafest_2023/IMG_2321.jpg', type: 'image' }
               ], {
                 groupAll: true,
                 Thumbs: { type: 'classic' }
@@ -86,4 +98,4 @@
   </main>
   <footer>&copy; 2025 mfotoz.com | Matija Zavasnik</footer>
 </body>
-</html> 
+</html>
