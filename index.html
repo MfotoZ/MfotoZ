@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Photography portfolio of Matija Zavasnik - mfotoz.com" />
   <title>MfotoZ - Photos</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet" />
-  <!-- Fancybox CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<header>
-  <div class="container">
-    <div class="header-left">
-      <a href="index.html" class="logo">
-        <img src="images/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
-      </a>
-      <a href="https://instagram.com/m.foto.z" target="_blank">
-        <img src="images/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
-      </a>
-      <a href="https://mail.google.com/mail/?view=cm&to=matijafotoz@gmail.com" target="_blank">
-        <img src="images/mfotoz-logo-mail.png" alt="Email" class="icon" />
-      </a>
-    </div>
+  <header>
+    <div class="container">
+      <div class="header-left">
+        <a href="index.html" class="logo">
+          <img src="images/logo/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
+        </a>
+        <a href="https://instagram.com/m.foto.z" target="_blank">
+          <img src="images/logo/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&to=matijafotoz@gmail.com" target="_blank">
+          <img src="images/logo/mfotoz-logo-mail.png" alt="Email" class="icon" />
+        </a>
+      </div>
 
-    <!-- Klasična navigacija, ki jo skrijemo na telefon -->
+ <!-- Klasična navigacija, ki jo skrijemo na telefon -->
     <nav class="header-right">
       <a href="index.html">PHOTOS</a>
       <a href="video.html">VIDEOS</a>
@@ -43,9 +39,9 @@
       <span></span>
     </button>
   </div>
-</header>
+  </header>
 
-<!-- Overlay meni -->
+  <!-- Overlay meni -->
 <div class="mobile-menu-overlay" aria-hidden="true">
   <nav class="mobile-menu">
     <a href="index.html">PHOTOS</a>
@@ -53,48 +49,75 @@
     <a href="about.html">ME</a>
   </nav>
 </div>
-<main>
- <div class="section">
-   <div class="gallery">
 
-   <div class="image-wrapper">
-     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_1774.jpg">
-       <img src="images/IMG_1794.jpg" alt="Pogled" style="cursor:pointer;" />
-     </a>
-     <div class="photo-title">Putafest diaprojekcija</div>
-     <!-- Hidden gallery images for Fancybox group -->
-     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_1779.jpg" style="display:none;"></a>
-     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_2006.jpg" style="display:none;"></a>
-     <a data-fancybox="putafest" href="images/Putafest_2023/IMG_2219.jpg" style="display:none;"></a>
-   </div>
-   <div class="image-wrapper">
-     <img src="images/IMG_1826.jpg" alt="Photo 2" />
-     <div class="photo-title">Ogled zadaj</div>
-   </div>
-   <div class="image-wrapper">
-     <img src="images/IMG_1837.jpg" alt="Photo 3" />
-     <div class="photo-title">Leopold</div>
-   </div>
-   <div class="image-wrapper">
-     <img src="images/IMG_2055.jpg" alt="Photo 4" />
-     <div class="photo-title">Tabu</div>
-   </div>
-   <div class="image-wrapper">
-     <img src="images/IMG_2242.jpg" alt="Photo 5" />
-     <div class="photo-title">Ljudje</div>
-   </div>
-   <div class="image-wrapper">
-     <img src="images/IMG_2321.jpg" alt="Photo 6" />
-     <div class="photo-title">Skater</div>
-   </div>
+  <main>
+    <div class="section">
+      <div class="gallery">
+        <!-- Remove the Putafest_2023 main preview, thumbnail row, and hidden links from the main gallery. Only keep other galleries and content. -->
 
-   </div> <!-- /.gallery -->
- </div> <!-- /.section -->
-</main>
 
-<footer>
-  &copy; 2025 mfotoz.com | Matija Zavasnik
-</footer>
+      
+ 
+    </div>
+    <div class="image-wrapper">
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1794.jpg">
+        <img src="images/Putafest_2023/IMG_1794.jpg" alt="Pütafest 2023 preview" />
+        <div class="photo-title">Pütafest 2023</div>
+      </a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1822.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1826.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1837.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1893.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_1958.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2006.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2055.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2219.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2242.jpg" style="display:none;"></a>
+      <a data-fancybox="putafest_2023" href="images/Putafest_2023/IMG_2321.jpg" style="display:none;"></a>
+    </div>
+    <div class="image-wrapper">
+      <a data-fancybox="galerija" href="images/Indija/IMG_8688.JPG">
+        <img src="images/Indija/IMG_8688.JPG" alt="Indija preview" />
+        <div class="photo-title">Indija</div>
+      </a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_0066.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_0068.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8524.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8679.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8867.JPG" style="display:none;"></a>
+      <a data-fancybox="galerija" href="images/Indija/IMG_8940.JPG" style="display:none;"></a>
+    </div>
+      </div>
+
+      <!-- End Putafest Gallery Thumbnails Row -->
+    </div>
+  </main>
+
+  <footer>&copy; 2025 mfotoz.com | Matija Zavasnik</footer>
+
+  
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+<script>
+  Fancybox.bind('[data-fancybox]', {
+    Thumbs: {
+      autoStart: true, // trak s predogledi bo odprt takoj
+      type: "classic"  // classic = horizontalni carousel
+    },
+    infinite: true     // omogoči kroženje (carousel loop)
+  });
+</script>
+
+
+<script>
+  Fancybox.bind('[data-fancybox="galerija"]', {
+    Thumbs: {
+      autoStart: true,
+      type: "classic"
+    },
+    infinite: true
+  });
+</script>
 
 <script>
   const hamburger = document.querySelector('.hamburger');
@@ -123,31 +146,31 @@
     }
   });
 
-const images = document.querySelectorAll('.image-wrapper');
-
-images.forEach(img => {
+document.querySelectorAll('.image-wrapper').forEach(wrapper => {
   let pressTimer;
 
-  img.addEventListener('touchstart', () => {
+  wrapper.addEventListener('touchstart', function(e) {
+    // Odstrani long-press iz vseh
+    document.querySelectorAll('.image-wrapper.long-press').forEach(el => el.classList.remove('long-press'));
     pressTimer = setTimeout(() => {
-      img.classList.add('long-press');
-    }, 200); // 200 ms držanja
+      wrapper.classList.add('long-press');
+    }, 400); // 400ms za long-press
   });
 
-  img.addEventListener('touchend', () => {
+  wrapper.addEventListener('touchend', function(e) {
     clearTimeout(pressTimer);
-    img.classList.remove('long-press');
+    // Odstrani long-press iz vseh
+    document.querySelectorAll('.image-wrapper.long-press').forEach(el => el.classList.remove('long-press'));
   });
 
-  img.addEventListener('touchcancel', () => {
+  // Za varnost: odstrani long-press ob scrollu ali dotiku drugje
+  wrapper.addEventListener('touchmove', function(e) {
     clearTimeout(pressTimer);
-    img.classList.remove('long-press');
+    document.querySelectorAll('.image-wrapper.long-press').forEach(el => el.classList.remove('long-press'));
   });
 });
-
 </script>
-<!-- Add Fancybox JS before closing body tag -->
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
-</body>
 
+
+</body>
 </html>
