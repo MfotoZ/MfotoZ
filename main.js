@@ -92,21 +92,18 @@ function initFancyboxGalleries() {
   const imageLinks = document.querySelectorAll('[data-fancybox]');
   if (imageLinks.length === 0) return;
 
-  Fancybox.bind('[data-fancybox]', {
-  Toolbar: {
-    display: [
-      { id: "counter" },
-      { id: "fullscreen" },
-      { id: "close" }
-    ]
-  },
-  Thumbs: {
-    autoStart: false
-  },
-  Image: {
-    zoom: false
-  }
-});
+    Fancybox.bind('[data-fancybox]', {
+    Toolbar: {
+      display: [
+        "play", // 🚀 To je diaprojekcija
+        "close"
+      ]
+    },
+    Thumbs: {
+      autoStart: true // poskusi s tem, če hočeš da so thumbs vidni takoj
+    }
+  });
+};
 
-}
+initFancyboxGalleries();
 
