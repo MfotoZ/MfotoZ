@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hvala za sporočilo</title>
+  <meta name="description" content="Kontaktna zahvala – mfotoz.com" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    .thank-you-container {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      color: white;
+    }
+
+    .thank-you-container h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .thank-you-container p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .thank-you-container a {
+      margin-top: 2rem;
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: white;
+      color: black;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .thank-you-container a:hover {
+      background-color: #444;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="header-left">
+        <a href="index.html" class="logo">
+          <img src="logo/mfotoz-logo-spletna-stran.png" alt="MfotoZ logo" />
+        </a>
+        <a href="https://instagram.com/m.foto.z" target="_blank">
+          <img src="logo/mfotoz-logo-instagram.png" alt="Instagram" class="icon" />
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&to=matijafotoz@gmail.com" target="_blank">
+          <img src="logo/mfotoz-logo-mail.png" alt="Email" class="icon" />
+        </a>
+      </div>
+
+      <nav class="header-right">
+        <a href="index.html">PHOTOS</a>
+        <a href="video.html">VIDEOS</a>
+        <a href="about.html">ME</a>
+      </nav>
+
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu-overlay" aria-hidden="true">
+    <nav class="mobile-menu">
+      <a href="index.html">PHOTOS</a>
+      <a href="video.html">VIDEOS</a>
+      <a href="about.html">ME</a>
+    </nav>
+  </div>
+
+  <main>
+    <div class="thank-you-container">
+      <h1>Hvala za tvoje sporočilo!</h1>
+      <p>Uspešno sem ga prejel. Potrudil se bom odgovoriti v najkrajšem možnem času.</p>
+      <a href="index.html">← Nazaj na začetno stran</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 mfotoz.com | Matija Zavasnik
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
