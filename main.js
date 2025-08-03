@@ -1,4 +1,3 @@
-
 import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@4/dist/fancybox.esm.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,25 +87,30 @@ function initVideoModal() {
   closeBtn.addEventListener('click', window.closeModal);
 }
 
-/** Fancybox galerija **/
 function initFancyboxGalleries() {
-  const imageLinks = document.querySelectorAll('[data-fancybox]');
-  if (imageLinks.length === 0) return;
-
   Fancybox.bind('[data-fancybox]', {
     Thumbs: {
-      autoStart: true
+      autoStart: false
     },
     Toolbar: {
       display: [
         { id: "counter" },
-        { id: "zoom" },
         { id: "fullscreen" },
-        { id: "thumbs" },
         { id: "close" }
       ]
     },
+    Image: {
+      zoom: false,
+      click: false,
+      wheel: "slide"
+    },
+    contentClick: "toggleMax",
+    contentDblClick: false,
+    placeFocusBack: false,
+    fitToView: true,
+    preload: 1,
     animated: true,
-    dragToClose: true
+    compact: false
   });
 }
+
