@@ -1,4 +1,3 @@
-import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@4/dist/fancybox.esm.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
@@ -72,6 +71,7 @@ function initVideoModal() {
 
   if (!modal || !video || !closeBtn) return;
 
+  // Naredimo funkciji globalni, da jih lahko kličeš iz HTMLja
   window.openModal = function (videoSrc) {
     video.src = videoSrc;
     modal.style.display = 'flex';
@@ -87,30 +87,26 @@ function initVideoModal() {
   closeBtn.addEventListener('click', window.closeModal);
 }
 
+
 function initFancyboxGalleries() {
+  const imageLinks = document.querySelectorAll('[data-fancybox]');
+  if (imageLinks.length === 0) return;
+
   Fancybox.bind('[data-fancybox]', {
-    Thumbs: {
-      autoStart: false
-    },
-    Toolbar: {
-      display: [
-        { id: "counter" },
-        { id: "fullscreen" },
-        { id: "close" }
-      ]
-    },
-    Image: {
-      zoom: false,
-      click: false,
-      wheel: "slide"
-    },
-    contentClick: "toggleMax",
-    contentDblClick: false,
-    placeFocusBack: false,
-    fitToView: true,
-    preload: 1,
-    animated: true,
-    compact: false
-  });
+  Toolbar: {
+    display: [
+      { id: "counter" },
+      { id: "fullscreen" },
+      { id: "close" }
+    ]
+  },
+  Thumbs: {
+    autoStart: false
+  },
+  Image: {
+    zoom: false
+  }
+});
+
 }
 
