@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Photography portfolio of Matija Zavasnik - mfotoz.com" />
-  <title>MfotoZ - Photos</title>
+  <title>MfotoZ - Videos</title>
+
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,14 +29,12 @@
       </a>
     </div>
 
- <!-- Klasična navigacija, ki jo skrijemo na telefon -->
     <nav class="header-right">
       <a href="index.html">PHOTOS</a>
       <a href="video.html">VIDEOS</a>
       <a href="about.html">ME</a>
     </nav>
 
-    <!-- Hamburger meni za telefone -->
     <button class="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span>
       <span></span>
@@ -52,18 +51,16 @@
     <a href="about.html">ME</a>
   </nav>
 </div>
+
 <main>
   <div class="section">
-
-      <div class="image-wrapper" onclick="openModal('videos/Vrhnika.mov')">
-        <video muted playsinline
-               style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;">
-          <source src="videos/Vrhnika.mov" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
-      </div>
-
+    <div class="image-wrapper" onclick="openModal('videos/Vrhnika.mov')">
+      <video muted playsinline
+             style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;">
+        <source src="videos/Vrhnika.mov" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
     </div>
   </div>
 </main>
@@ -76,15 +73,13 @@
   </div>
 </div>
 
-
 <footer>
-    &copy; 2025 mfotoz.com | Matija Zavasnik
+  &copy; 2025 mfotoz.com | Matija Zavasnik
 </footer>
 
-<script type="module" src="main.js"></script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.0/dist/fancybox.umd.js"></script>
+<script src="main.js"></script>
 
 </body>
-
 </html>
