@@ -81,84 +81,8 @@
     &copy; 2025 mfotoz.com | Matija Zavasnik
 </footer>
 
- <script>
-  function openModal(videoSrc) {
-    const modal = document.getElementById("videoModal");
-    const video = document.getElementById("modalVideo");
-    video.src = videoSrc;
-    modal.style.display = "flex";
-    video.play();
-  }
+<script type="module" src="main.js"></script>
 
-  function closeModal() {
-    const modal = document.getElementById("videoModal");
-    const video = document.getElementById("modalVideo");
-    modal.style.display = "none";
-    video.pause();
-    video.src = ""; // očisti vir
-  }
-
-  function toggleFullscreen() {
-    const video = document.getElementById("modalVideo");
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) {
-      video.msRequestFullscreen();
-    }
-  }
-</script>
-<script>
-  const hamburger = document.querySelector('.hamburger');
-  const mobileMenu = document.querySelector('.mobile-menu-overlay');
-
-  hamburger.addEventListener('click', () => {
-    const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-    hamburger.setAttribute('aria-expanded', !expanded);
-    hamburger.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
-  });
-
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.setAttribute('aria-expanded', false);
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-    });
-  });
-
-  mobileMenu.addEventListener('click', e => {
-    if (e.target === mobileMenu) {
-      hamburger.setAttribute('aria-expanded', false);
-      hamburger.classList.remove('active');
-      mobileMenu.classList.remove('active');
-    }
-  });
-
-const images = document.querySelectorAll('.image-wrapper');
-
-images.forEach(img => {
-  let pressTimer;
-
-  img.addEventListener('touchstart', () => {
-    pressTimer = setTimeout(() => {
-      img.classList.add('long-press');
-    }, 200); // 200 ms držanja
-  });
-
-  img.addEventListener('touchend', () => {
-    clearTimeout(pressTimer);
-    img.classList.remove('long-press');
-  });
-
-  img.addEventListener('touchcancel', () => {
-    clearTimeout(pressTimer);
-    img.classList.remove('long-press');
-  });
-});
-
-</script>
 
 
 </body>
