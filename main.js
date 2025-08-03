@@ -92,8 +92,13 @@ function initFancyboxGalleries() {
   const imageLinks = document.querySelectorAll('[data-fancybox]');
   if (imageLinks.length === 0) return;
 
+ function initFancyboxGalleries() {
+  const imageLinks = document.querySelectorAll('[data-fancybox]');
+  if (imageLinks.length === 0) return;
+
   Fancybox.bind('[data-fancybox]', {
     Toolbar: {
+      show: true,
       display: [
         "play",       // 🎞️ Diaprojekcija
         "fullscreen", // 🔲 Celozaslonski prikaz
@@ -105,6 +110,6 @@ function initFancyboxGalleries() {
     }
   });
 }
+}
 
 initFancyboxGalleries();
-
