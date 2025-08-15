@@ -1,4 +1,4 @@
-
+ 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initLongPressOnImages();
@@ -51,7 +51,7 @@ function initLongPressOnImages() {
       document.querySelectorAll('.image-wrapper.long-press').forEach(el => el.classList.remove('long-press'));
       pressTimer = setTimeout(() => {
         wrapper.classList.add('long-press');
-      }, 400);
+      }, 250);
     });
 
     ['touchend', 'touchcancel', 'touchmove'].forEach(evt =>
@@ -111,5 +111,27 @@ function initFancyboxGalleries() {
   });
 }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const filterLinks = document.querySelectorAll('.sub-menu a');
+  const imageWrappers = document.querySelectorAll('.image-wrapper');
+
+  filterLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const filter = link.getAttribute('data-filter');
+
+      imageWrappers.forEach(wrapper => {
+        const category = wrapper.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          wrapper.style.display = 'inline-block';
+        } else {
+          wrapper.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+
 
 initFancyboxGalleries();
