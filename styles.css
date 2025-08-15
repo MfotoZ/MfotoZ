@@ -88,23 +88,22 @@ nav a:hover {
 }
 
 
-.image-wrapper img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .image-wrapper {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  width: 26%;
+  width: 24%;       /* prej 26% → zdaj 4 stolpci */
+  margin-bottom: 6px;
+  vertical-align: top;
 }
 
 .image-wrapper img {
   width: 100%;
+  height: auto;
   display: block;
+  object-fit: cover;
 }
+
 
 .image-wrapper::before {
   content: "";
@@ -295,11 +294,14 @@ nav a:hover {
 
 nav a {
   position: relative;
-  color: white;           /* napis vedno bel */
+  color: white;
   text-decoration: none;
   padding: 0.5rem;
   transition: color 0.3s ease;
+  font-size: 1.3rem; /* večja velikost črk */
+  font-weight: 800;  /* malo bolj poudarjeno */
 }
+
 
 nav a::after {
   content: "";
@@ -587,6 +589,7 @@ body {
   flex-direction: column;
   gap: 2rem;
   text-align: center;
+  align-items: center; /* sredinsko poravnano */
 }
 
 .mobile-menu a {
@@ -598,19 +601,26 @@ body {
   padding-bottom: 5px;
   cursor: pointer;
   user-select: none;
+  font-size: 2.2rem;
+  text-align: center;
 }
 
-/* Animacija podčrtave iz leve proti desni */
 .mobile-menu a::after {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   height: 3px;
   width: 0;
   background: white;
   transition: width 0.4s ease;
   border-radius: 2px;
+}
+
+
+.mobile-menu a.active::after {
+  width: 100%;
 }
 
 .mobile-menu a:hover::after,
@@ -702,3 +712,56 @@ body {
 .mobile-menu-overlay.active {
   display: flex !important;
 }
+
+
+.category-submenu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  box-sizing: border-box;
+}
+
+
+
+
+.category-submenu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.category-submenu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.category-submenu a:hover::after,
+.category-submenu a.active::after {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .category-submenu {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+nav a.active::after {
+  width: 100%;
+}
+
+
+
