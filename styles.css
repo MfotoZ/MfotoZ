@@ -773,5 +773,44 @@ nav a.active::after {
   width: 100%;
 }
 
+/* Zaporedno nalaganje galerije */
+.image-wrapper.pending { 
+  visibility: hidden;
+}
+
+.image-wrapper.fade-in {
+  visibility: visible;
+  animation: fadeIn .35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 3 pikice indikator */
+.dots-loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .4rem;
+  padding: 1rem 0 2rem 0;
+}
+
+.dots-loader .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #fff;
+  opacity: .4;
+  animation: blink 1.2s infinite;
+}
+
+.dots-loader .dot:nth-child(2) { animation-delay: .2s; }
+.dots-loader .dot:nth-child(3) { animation-delay: .4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: .2; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
 
 
