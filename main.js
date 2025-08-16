@@ -71,18 +71,25 @@ function initVideoModal() {
 
   if (!modal || !video || !closeBtn) return;
 
-  // Naredimo funkciji globalni, da jih lahko kličeš iz HTMLja
-  window.openModal = function (videoSrc) {
-    video.src = videoSrc;
-    modal.style.display = 'flex';
-    video.play();
-  };
+// znotraj initVideoModal()
+window.openModal = function (url) {
+  const m = document.getElementById('videoModal');
+  const v = document.getElementById('modalVideo');
+  v.src = url;
+  v.load();
+  v.play().catch(() => {});
+  m.style.display = 'flex'; // ali m.classList.add('open') če uporabljaš razred
+};
 
-  window.closeModal = function () {
-    modal.style.display = 'none';
-    video.pause();
-    video.src = '';
-  };
+window.closeModal = function () {
+  const m = document.getElementById('videoModal');
+  const v = document.getElementById('modalVideo');
+  v.pause();
+  v.removeAttribute('src'); // počisti, da ne kuri prometa
+  v.load();
+  m.style.display = 'none'; // ali m.classList.remove('open')
+};
+
 
   closeBtn.addEventListener('click', window.closeModal);
 }
