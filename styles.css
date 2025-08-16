@@ -813,4 +813,33 @@ nav a.active::after {
   40% { opacity: 1; transform: translateY(-3px); }
 }
 
+/* Animacija razporejanja pri filtriranju (FLIP) */
+.image-wrapper {
+  transition: transform .35s ease, opacity .25s ease;
+  will-change: transform, opacity;
+}
 
+.image-wrapper.anim-enter {
+  opacity: 0;
+  transform: scale(0.98);
+}
+.image-wrapper.anim-enter.anim-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: transform .35s ease, opacity .25s ease;
+}
+
+/* Dinamične širine po filtru */
+.image-wrapper.full    { width: 100%; }
+.image-wrapper.half    { width: 48%; }
+.image-wrapper.quarter { width: 24%; }
+
+@media (max-width: 900px) {
+  .image-wrapper.half,
+  .image-wrapper.quarter { width: 48%; }
+}
+@media (max-width: 600px) {
+  .image-wrapper.full,
+  .image-wrapper.half,
+  .image-wrapper.quarter { width: 98%; }
+}
