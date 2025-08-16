@@ -54,14 +54,15 @@
 
 <main>
   <div class="section">
-    <div class="image-wrapper" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mov')">
-      <video muted playsinline
-             style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;">
-        <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mov" type="video/mp4">
-      </video>
-      <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
-    </div>
+  <div class="image-wrapper" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mov')">
+    <video muted playsinline preload="metadata"
+           style="width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;">
+      <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mov" type="video/quicktime">
+      Your browser does not support the video tag.
+    </video>
+    <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
   </div>
+</div>
 </main>
 
 <!-- CINEMA MODAL -->
