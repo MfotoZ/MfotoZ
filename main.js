@@ -140,5 +140,97 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 initFancyboxGalleries();
+
+// === Zaporedno nalaganje galerije na index.html (ne dotika se video strane!) ===
+(function initSequentialGallery() {
+  // Vsi wrapperji…
+  const wrappersAll = Array.from(document.querySelectorAll('.image-wrapper'));
+  // … ampak nas zanimajo le tisti, ki dejansko vsebujejo <img> (ne video!)
+  const wrappers = wrappersAll.filter(w => w.querySelector('img'));
+  if (wrappers.length === 0) return; // npr. video.html → nič ne delaj
+
+  // Prestavi src -> data-src samo pri slikah v teh wrapperjih
+  const allImgs = wrappers.flatMap(w => Array.from(w.querySelectorAll('img')));
+  allImgs.forEach(img => {
+    if (!img.dataset.src && img.getAttribute('src')) {
+      img.dataset.src = img.getAttribute('src');
+      img.removeAttribute('src');
+      img.loading = 'lazy';
+    }
+  });
+
+  // Skrij le “slikovne” wrapperje, video wrapperjev se ne dotikamo
+  wrappers.forEach(w => w.classList.add('pending'));
+
+  // 8 slik najprej, nato še 8 (dve vrstici); preostalo pusti nedotaknjeno
+  const firstBatchCount = Math.min(8, wrappers.length);
+  const secondBatchCount = Math.min(16, wrappers.length);
+
+  sequentiallyLoadTiles(wrappers.slice(0, firstBatchCount)).then(() => {
+    insertDotsLoaderAfter(wrappers[firstBatchCount - 1]);
+
+    sequentiallyLoadTiles(wrappers.slice(firstBatchCount, secondBatchCount)).then(() => {
+      removeDotsLoader();
+      // ostalo lahko dodaš kasneje z “load more”, če želiš
+    });
+  });
+
+  // Lazy nalaganje skritih slik v odprti Fancybox skupini
+  document.querySelectorAll('.image-wrapper > a[data-fancybox]:first-child').forEach(a => {
+    a.addEventListener('click', () => {
+      const group = a.getAttribute('data-fancybox');
+      if (!group) return;
+
+      const groupAnchors = Array.from(document.querySelectorAll(`a[data-fancybox="${group}"]`));
+      const thumbsToLoad = groupAnchors
+        .map(x => x.querySelector('img'))
+        .filter(img => img && img.dataset && img.dataset.src && !img.getAttribute('src'));
+
+      sequentiallyLoadImages(thumbsToLoad);
+    }, { once: true });
+  });
+
+  // ---- helpers ----
+  function loadOneImage(img) {
+    return new Promise(resolve => {
+      const done = () => resolve();
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true });
+      img.src = img.dataset.src;
+    });
+  }
+
+  function sequentiallyLoadImages(imgs) {
+    return imgs.reduce((p, img) => p.then(() => loadOneImage(img)), Promise.resolve());
+  }
+
+  function sequentiallyLoadTiles(tiles) {
+    const items = tiles.map(w => {
+      const mainA = w.querySelector('a[data-fancybox]:first-child');
+      const img = mainA ? mainA.querySelector('img') : w.querySelector('img');
+      return { wrapper: w, img };
+    }).filter(x => x.img);
+
+    return items.reduce((p, x) => p.then(() =>
+      loadOneImage(x.img).then(() => {
+        x.wrapper.classList.remove('pending');
+        x.wrapper.classList.add('fade-in');
+      })
+    ), Promise.resolve());
+  }
+
+  let dotsEl = null;
+  function insertDotsLoaderAfter(wrapper) {
+    if (!wrapper) return;
+    dotsEl = document.createElement('div');
+    dotsEl.className = 'dots-loader';
+    dotsEl.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    const section = wrapper.closest('.section') || document.querySelector('.section');
+    if (section) wrapper.insertAdjacentElement('afterend', dotsEl);
+  }
+  function removeDotsLoader() {
+    if (dotsEl && dotsEl.parentNode) dotsEl.parentNode.removeChild(dotsEl);
+    dotsEl = null;
+  }
+})();
