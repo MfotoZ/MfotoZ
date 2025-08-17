@@ -780,7 +780,7 @@ nav a.active::after {
 
 .image-wrapper.fade-in {
   visibility: visible;
-  animation: fadeIn .35s ease-out;
+  animation: fadeIn .7s ease-out;
 }
 
 @keyframes fadeIn {
@@ -842,4 +842,30 @@ nav a.active::after {
   .image-wrapper.full,
   .image-wrapper.half,
   .image-wrapper.quarter { width: 98%; }
+}
+
+/* nežno skrivanje pri menjavi filtrov */
+.image-wrapper { opacity: 1; }
+.image-wrapper.hiding { 
+  opacity: 0; 
+  transition: opacity .55s ease; /* počasneje, da pride do izraza */
+}
+
+/* Mobilno glajenje animacij (iOS Safari & Android) */
+.image-wrapper {
+  backface-visibility: hidden;
+  transform: translateZ(0);              /* posili GPU layer */
+  will-change: transform, opacity;       /* že imaš, pustimo */
+}
+
+/* naj fade-in obdrži končno stanje na Safari-ju */
+.image-wrapper.fade-in {
+  animation-fill-mode: both;
+}
+
+/* malo daljši fade-out na telefonu */
+@media (hover: none) {
+  .image-wrapper.hiding { 
+    transition: opacity .7s ease;        /* bilo .55s – malo počasneje */
+  }
 }
