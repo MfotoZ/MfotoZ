@@ -8,7 +8,878 @@
 
 /* Telo strani */
 body {
+  font-family: 'Antonio', sans-serif;/* Reset osnovnih vrednosti */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: 'Antonio', sans-serif;
+}
+
+/* Telo strani */
+body {
+  font-family: 'Antonio', sans-serif;
+  background: linear-gradient(to bottom, #000000 0%, #1a1a1a 50%, #000000 100%);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background-color: #000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  padding: 0.2rem 2rem;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo img {
+  height: 60px;
+  cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Navigacija */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* Sekcije */
+.section {
+  max-width: 2100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  flex: 1;
+}
+
+/* Galerija */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 24%;       /* prej 26% → zdaj 4 stolpci */
+  margin-bottom: 6px;
+  vertical-align: top;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.image-wrapper video {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;   /* odstrani fiksno 16/9 */
+  object-fit: cover;    /* naj zapolni okvir */
+  display: block;
+}
+
+
+
+.image-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: white;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 1;
+}
+
+.image-wrapper:hover::before {
+  opacity: 0.85;
+}
+
+.photo-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(10px);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  z-index: 2;
+}
+
+.image-wrapper:hover .photo-title {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+
+/* Poskrbi, da se slike lepo prilagodijo na manjših zaslonih */
+@media (max-width: 900px) {
+  .image-wrapper {
+    width: 48%;
+  }
+}
+@media (max-width: 600px) {
+  .image-wrapper {
+    width: 98%;
+    margin-bottom: 5px;
+  }
+}
+
+
+.image-wrapper.long-press .photo-title {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+
+.gallery img {
+  object-fit: cover;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+
+
+/* Video galerija */
+.video-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.video-gallery iframe {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  border: none;
+}
+
+/* O meni (about) */
+.about-contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6rem;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto 3rem auto;
+}
+
+.about-text {
+  flex: 1 1 300px;
+  min-width: 480px;
+  text-align: justify;
+  font-size: 1.1rem;
+}
+
+.about-text h2 {
+  font-family: 'Crimson', serif;
+  font-size: 2.4rem;
+  margin-bottom: 0.4rem;
+  text-align: center;
+}
+
+.about-text h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.about-text p {
+  font-family: 'Antonio', sans-serif;
+  font-weight: 300; /* light */
+  font-size: 1.3rem; /* ali kakšno drugo velikost želiš */
+  color: white;
+  line-height: 1.5;
+}
+
+
+/* Kontaktni obrazec */
+.contact-form {
+  flex: 1 1 300px;
+  min-width: 480px;
+  font-family: 'Antonio', sans-serif;
+}
+
+.contact-form h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-family: 'Antonio', sans-serif;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  font-family: 'Antonio', sans-serif;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #171717;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  font-family: 'Antonio', sans-serif;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #ccc;
+  font-family: 'Antonio', sans-serif;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-form button {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  background-color: #ffffff; /* belo ozadje */
+  color: #000000; /* črna pisava */
+  border: 2px solid black; /* črn rob */
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  font-family: 'Antonio', sans-serif;
+}
+
+.contact-form button:hover {
+  background-color: #171717; /* črno ozadje */
+  color: #ffffff; /* bela pisava */
+  border: 2px solid white; /* bel rob */
+}
+
+
+nav a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+  font-size: 1.3rem; /* večja velikost črk */
+  font-weight: 800;  /* malo bolj poudarjeno */
+}
+
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;            /* tanjša črta */
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  width: 80%;
+  max-width: 900px;
+  color: white;
+}
+
+.close-btn {
+  position: fixed;       /* fiksiran na zaslonu */
+  top: 10px;             /* malo od roba od zgoraj */
+  right: 10px;           /* malo od roba desno */
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2.5rem;     /* večja pisava za boljši klik */
+  cursor: pointer;
+  z-index: 10000;        /* naj bo vedno nad vsemi elementi */
+  padding: 0;
+  line-height: 1;
+}
+
+
+.modal-content video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.hero {
+  position: relative;
+  max-width: 1570px;
+  margin: 0 auto;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block; 
+  position: relative;
+  z-index: 1;
+}
+
+/* Črni fade zgoraj */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* višino prilagodi po želji */
+  background: linear-gradient(to bottom, rgba(0,0,0.4,1), rgba(0,0,0,0));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Črni fade spodaj */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+
+  background: linear-gradient(
+    to top,
+    rgba(3, 3, 3, 0.4), /* manj močna črna barva spodaj */
+    #151515 0%,         /* želen odtenek */
+    rgba(50, 50, 50, 0) /* prehod v prosojnost */
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+/* Footer */
+footer {
+  margin-top: auto;
+  padding: 1rem;
+  background-color: #000;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 400;
+}
+
+/* Responsive dodatki za telefone in manjše zaslone */
+
+@media (max-width: 700px) {
+  .about-contact-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  /* Tukaj je posodobljena velikost za besedilo in obrazec */
+  .about-text,
+  .contact-form {
+    max-width: 80%;
+    font-size: 0.8rem;
+    margin: 0 auto;
+  }
+
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form button {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+
+  .video-gallery {
+    padding: 1rem;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .header-right {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hero img {
+    max-width: 90%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* manjša višina za samo spodnji del */
+    background: linear-gradient(
+      to top,
+      rgba(5, 5, 5, 1), /* črna, z manjšo prosojnostjo */
+      rgba(0, 0, 0, 0)    /* prehod v prosojnost */
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+
+@media (max-width: 480px) {
+  /* Logotip še manjši na zelo majhnih zaslonih */
+  .logo img {
+    height: 30px;
+  }
+
+  /* Galerija slik na 1 stolpec za najbolj majhne zaslone */
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  /* Tekst v about naj bo malo manjši in levo poravnan */
+  .about-text {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  /* Kontaktni obrazec naj zasede celo širino */
+  .contact-form {
+    width: 100%;
+  }
+
+  /* Manjši padding in pisava v navigaciji */
+  nav a {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Modal video naj zavzame skoraj cel zaslon na telefonu */
+  .modal-content {
+    width: 95%;
+  }
+}
+
+/* Prepreči horizontalni scroll */
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 480px) {
+  .hero img {
+    max-width: 95%;
+  }
+
+  .about-text,
+  .contact-form {
+    font-size: 1rem;
+    text-align: left;
+    padding: 0 0.5rem;
+    max-width: 100%;
+  }
+
+  nav a {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}
+
+/* Skrijemo hamburger meni in mobile overlay privzeto */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  z-index: 1;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile menu overlay privzeto skrit */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(3, 3, 3, 0.85); /* temno siv prosojen gradient */
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile menu nav styling */
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+  align-items: center; /* sredinsko poravnano */
+}
+
+.mobile-menu a {
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 2.2rem;
+  text-align: center;
+}
+
+.mobile-menu a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 3px;
+  width: 0;
+  background: white;
+  transition: width 0.4s ease;
+  border-radius: 2px;
+}
+
+
+.mobile-menu a.active::after {
+  width: 100%;
+}
+
+.mobile-menu a:hover::after,
+.mobile-menu a:focus::after {
+  width: 100%;
+}
+
+/* Pokaži hamburger in prilagodi header na telefonih */
+@media (max-width: 700px) {
+  /* Skrij klasično navigacijo */
+  .header-right {
+    display: none;
+  }
+
+  /* Prikaži hamburger */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Prilagodi logo - večji */
+  .logo img {
+    height: 70px; /* večji kot prej */
+  }
+
+  /* Skrij Instagram in mail gumbe iz header-right, ker so sedaj v header-left ostanejo */
+  /* Če želiš še dodatno jih lahko tudi prilagodiš */
+
+  /* Pokaži le header-left (logo + Instagram + mail) */
+  .header-left {
+    gap: 1rem;
+  }
+}
+
+/* Ko je meni odprt, pokaži overlay */
+.mobile-menu-overlay.active {
+  display: flex;
+}
+
+/* Animacija hamburgerja v X ob kliku */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.fancybox__thumbs .fancybox__thumb img {
+  object-fit: scale-down !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block;
+  margin: auto;
+}
+
+
+.fancybox__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+.fancybox__slide img {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100vh; /* omogoči, da slika zavzame skoraj celo višino */
+  height: auto;
+}
+
+
+.hidden-thumb {
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+}
+
+.mobile-menu-overlay.active {
+  display: flex !important;
+}
+
+
+.category-submenu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  box-sizing: border-box;
+}
+
+
+
+
+.category-submenu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.category-submenu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.category-submenu a:hover::after,
+.category-submenu a.active::after {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .category-submenu {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+nav a.active::after {
+  width: 100%;
+}
+
+/* Zaporedno nalaganje galerije */
+.image-wrapper.pending { 
+  visibility: hidden;
+}
+
+.image-wrapper.fade-in {
+  visibility: visible;
+  animation: fadeIn .7s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 3 pikice indikator */
+.dots-loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .4rem;
+  padding: 1rem 0 2rem 0;
+}
+
+.dots-loader .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #fff;
+  opacity: .4;
+  animation: blink 1.2s infinite;
+}
+
+.dots-loader .dot:nth-child(2) { animation-delay: .2s; }
+.dots-loader .dot:nth-child(3) { animation-delay: .4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: .2; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* Animacija razporejanja pri filtriranju (FLIP) */
+.image-wrapper {
+  transition: transform .35s ease, opacity .25s ease;
+  will-change: transform, opacity;
+}
+
+.image-wrapper.anim-enter {
+  opacity: 0;
+  transform: scale(0.98);
+}
+.image-wrapper.anim-enter.anim-enter-active {
+  opacity: 1;
+  transform: none;
+  transition: transform .35s ease, opacity .25s ease;
+}
+
+/* Dinamične širine po filtru */
+.image-wrapper.full    { width: 100%; }
+.image-wrapper.half    { width: 48%; }
+.image-wrapper.quarter { width: 24%; }
+
+@media (max-width: 900px) {
+  .image-wrapper.half,
+  .image-wrapper.quarter { width: 48%; }
+}
+@media (max-width: 600px) {
+  .image-wrapper.full,
+  .image-wrapper.half,
+  .image-wrapper.quarter { width: 98%; }
+}
+
+/* nežno skrivanje pri menjavi filtrov */
+.image-wrapper { opacity: 1; }
+.image-wrapper.hiding { 
+  opacity: 0; 
+  transition: opacity .55s ease; /* počasneje, da pride do izraza */
+}
+
+/* Mobilno glajenje animacij (iOS Safari & Android) */
+.image-wrapper {
+  backface-visibility: hidden;
+  transform: translateZ(0);              /* posili GPU layer */
+  will-change: transform, opacity;       /* že imaš, pustimo */
+}
+
+/* naj fade-in obdrži končno stanje na Safari-ju */
+.image-wrapper.fade-in {
+  animation-fill-mode: both;
+}
+
+/* malo daljši fade-out na telefonu */
+@media (hover: none) {
+  .image-wrapper.hiding { 
+    transition: opacity .7s ease;        /* bilo .55s – malo počasneje */
+  }
+}
+
   background: linear-gradient(to bottom, #000000 0%, #1a1a1a 50%, #000000 100%);
   color: white;
   min-height: 100vh;
