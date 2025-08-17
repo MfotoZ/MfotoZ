@@ -143,99 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 initFancyboxGalleries();
 
-// === Zaporedno nalaganje galerije na index.html (ne dotika se video strane!) ===
-(function initSequentialGallery() {
-  // Vsi wrapperji…
-  const wrappersAll = Array.from(document.querySelectorAll('.image-wrapper'));
-  // … ampak nas zanimajo le tisti, ki dejansko vsebujejo <img> (ne video!)
-  const wrappers = wrappersAll.filter(w => w.querySelector('img'));
-  if (wrappers.length === 0) return; // npr. video.html → nič ne delaj
-
-  // Prestavi src -> data-src samo pri slikah v teh wrapperjih
-  const allImgs = wrappers.flatMap(w => Array.from(w.querySelectorAll('img')));
-  allImgs.forEach(img => {
-    if (!img.dataset.src && img.getAttribute('src')) {
-      img.dataset.src = img.getAttribute('src');
-      img.removeAttribute('src');
-      img.loading = 'lazy';
-    }
-  });
-
-  // Skrij le “slikovne” wrapperje, video wrapperjev se ne dotikamo
-  wrappers.forEach(w => w.classList.add('pending'));
-
-  // 8 slik najprej, nato še 8 (dve vrstici); preostalo pusti nedotaknjeno
-  const firstBatchCount = Math.min(8, wrappers.length);
-  const secondBatchCount = Math.min(16, wrappers.length);
-
-  sequentiallyLoadTiles(wrappers.slice(0, firstBatchCount)).then(() => {
-    insertDotsLoaderAfter(wrappers[firstBatchCount - 1]);
-
-    sequentiallyLoadTiles(wrappers.slice(firstBatchCount, secondBatchCount)).then(() => {
-      removeDotsLoader();
-      // ostalo lahko dodaš kasneje z “load more”, če želiš
-    });
-  });
-
-  // Lazy nalaganje skritih slik v odprti Fancybox skupini
-  document.querySelectorAll('.image-wrapper > a[data-fancybox]:first-child').forEach(a => {
-    a.addEventListener('click', () => {
-      const group = a.getAttribute('data-fancybox');
-      if (!group) return;
-
-      const groupAnchors = Array.from(document.querySelectorAll(`a[data-fancybox="${group}"]`));
-      const thumbsToLoad = groupAnchors
-        .map(x => x.querySelector('img'))
-        .filter(img => img && img.dataset && img.dataset.src && !img.getAttribute('src'));
-
-      sequentiallyLoadImages(thumbsToLoad);
-    }, { once: true });
-  });
-
-  // ---- helpers ----
-  function loadOneImage(img) {
-    return new Promise(resolve => {
-      const done = () => resolve();
-      img.addEventListener('load', done, { once: true });
-      img.addEventListener('error', done, { once: true });
-      img.src = img.dataset.src;
-    });
-  }
-
-  function sequentiallyLoadImages(imgs) {
-    return imgs.reduce((p, img) => p.then(() => loadOneImage(img)), Promise.resolve());
-  }
-
-  function sequentiallyLoadTiles(tiles) {
-    const items = tiles.map(w => {
-      const mainA = w.querySelector('a[data-fancybox]:first-child');
-      const img = mainA ? mainA.querySelector('img') : w.querySelector('img');
-      return { wrapper: w, img };
-    }).filter(x => x.img);
-
-    return items.reduce((p, x) => p.then(() =>
-      loadOneImage(x.img).then(() => {
-        x.wrapper.classList.remove('pending');
-        x.wrapper.classList.add('fade-in');
-      })
-    ), Promise.resolve());
-  }
-
-  let dotsEl = null;
-  function insertDotsLoaderAfter(wrapper) {
-    if (!wrapper) return;
-    dotsEl = document.createElement('div');
-    dotsEl.className = 'dots-loader';
-    dotsEl.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
-    const section = wrapper.closest('.section') || document.querySelector('.section');
-    if (section) wrapper.insertAdjacentElement('afterend', dotsEl);
-  }
-  function removeDotsLoader() {
-    if (dotsEl && dotsEl.parentNode) dotsEl.parentNode.removeChild(dotsEl);
-    dotsEl = null;
-  }
-})();
-
 function initCategoryFilter() {
   const filterLinks = document.querySelectorAll('.category-submenu a[data-filter], .category-submenu .filter-btn');
   if (!filterLinks.length) return;
@@ -245,64 +152,82 @@ function initCategoryFilter() {
 
   let firstRun = true; // prvi "ALL" ne animiramo
 
-  const applyFilter = (filter) => {
-    // aktivni gumb
-    filterLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('data-filter') === filter);
-    });
+const applyFilter = (filter) => {
+  const REVEAL_DELAY = 140; // zamik med novimi ploščicami (kot na vstopu)
 
-    // === 1) FLIP: izmeri "prvo" stanje (samo za trenutno vidne) ===
-    const currentlyVisible = wrappers.filter(w => w.style.display !== 'none');
-    const firstRects = new Map();
-    currentlyVisible.forEach(w => {
-      firstRects.set(w, w.getBoundingClientRect());
-    });
+  // 0) aktivni gumb
+  filterLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('data-filter') === filter);
+  });
 
-    // === 2) Uveljavi filter (prikaži/skrij) ===
-    wrappers.forEach(w => {
-      const cat = w.getAttribute('data-category') || 'all';
-      const show = (filter === 'all' || cat === filter);
-      w.style.display = show ? 'inline-block' : 'none';
-    });
-
-    // === 3) Za novo vidne elemente naloži thumbs in odstrani .pending ===
-    const nowVisible = imageWrappers.filter(w => w.style.display !== 'none');
-
-    // naloži glavne sličice vidnih (če še niso) + odstrani pending (tvoj obstoječi flow)
-    sequentiallyLoadVisibleWrappers(nowVisible).then(() => {
-      // === 4) FLIP animacija: samo, če to ni prvi zagon ===
-      if (!firstRun) {
-        // nova pozicija vidnih
-        nowVisible.forEach(w => {
-          const lastRect = w.getBoundingClientRect();
-          const firstRect = firstRects.get(w);
-          if (!firstRect) {
-            // nov element (prej skrit): naredimo kratek fade-in/scale
-            w.classList.add('anim-enter');
-            // force reflow, da se prenese razred
-            // eslint-disable-next-line no-unused-expressions
-            w.offsetWidth;
-            w.classList.add('anim-enter-active');
-            setTimeout(() => {
-              w.classList.remove('anim-enter', 'anim-enter-active');
-            }, 380);
-            return;
-          }
-          const dx = firstRect.left - lastRect.left;
-          const dy = firstRect.top  - lastRect.top;
-          if (dx || dy) {
-            w.style.transform = `translate(${dx}px, ${dy}px)`;
-            // force reflow
-            // eslint-disable-next-line no-unused-expressions
-            w.offsetWidth;
-            w.style.transform = '';
-          }
-        });
-      } else {
-        firstRun = false;
-      }
-    }).catch(() => { /* ignore */ });
+  // 1) kdo sodi v izbran filter?
+  const matches = (w) => {
+    const cat = w.getAttribute('data-category') || 'all';
+    return (filter === 'all' || cat === filter);
   };
+
+  const allWrappers   = wrappers;                               // vsi
+  const visibleBefore = allWrappers.filter(w => w.style.display !== 'none');
+  const toHide        = visibleBefore.filter(w => !matches(w)); // vidni → morajo izginiti
+  const stillVisible  = visibleBefore.filter(matches);          // vidni in ostanejo
+  const hiddenBefore  = allWrappers.filter(w => w.style.display === 'none');
+  const toShow        = hiddenBefore.filter(matches);           // skriti → morajo se pokazati
+
+  // 2) najprej nežno zbledi tiste, ki odpadejo
+  toHide.forEach(w => w.classList.add('hiding'));
+
+  // 3) po koncu bledenja jih skrij in nato pokaži nove zaporedoma
+  setTimeout(async () => {
+    // dokončno skrij odpadle
+    toHide.forEach(w => { 
+      w.style.display = 'none'; 
+      w.classList.remove('hiding');
+    });
+
+    // PRIPRAVA na prikaz novih:
+    // - nastavi display, označi 'pending'
+    // - če imajo IMG brez src (a z data-src), se bodo naložile sproti
+    toShow.forEach(w => {
+      w.style.display = 'inline-block';
+      if (!w.classList.contains('pending')) w.classList.add('pending');
+    });
+
+    // zaporedno prikaži NOVE (kot ob vstopu)
+    for (const w of toShow) {
+      // najdi "glavno" sliko (če obstaja) in jo po potrebi naloži
+      const mainA = w.querySelector('a[data-fancybox]:first-child');
+      const img   = mainA ? mainA.querySelector('img') : w.querySelector('img');
+      if (img && !img.getAttribute('src') && img.dataset && img.dataset.src) {
+        await new Promise(res => {
+          const done = () => res();
+          img.addEventListener('load',  done, { once:true });
+          img.addEventListener('error', done, { once:true });
+          img.src = img.dataset.src;
+        });
+      }
+      w.classList.remove('pending');
+      w.classList.add('fade-in');
+      await new Promise(r => setTimeout(r, REVEAL_DELAY)); // “stagger”
+    }
+
+// Dinamične širine: 2 -> half, drugače -> quarter (tudi 1 kos naj bo quarter)
+const visibleNow = wrappers.filter(w => w.style.display !== 'none');
+wrappers.forEach(w => w.classList.remove('full','half','quarter'));
+
+if (visibleNow.length === 2) {
+  visibleNow.forEach(w => w.classList.add('half'));
+} else {
+  visibleNow.forEach(w => w.classList.add('quarter')); // 1 ali 3+ kosov
+}
+
+
+    // 5) skrij dots-loader, razen pri 'all'
+    document.querySelectorAll('.dots-loader')
+      .forEach(el => el.style.display = (filter === 'all' ? '' : 'none'));
+
+  }, 570); // malce > .55s iz CSS .hiding, da ujamemo konec bledenja
+};
+
 
   // klik na gumbe
   filterLinks.forEach(link => {
@@ -344,3 +269,112 @@ function initCategoryFilter() {
     ), Promise.resolve());
   }
 }
+
+// === Zaporedno nalaganje galerije + video strani (stagger + podpora za <video>) ===
+(function initSequentialGallery() {
+   const isMobile = window.matchMedia && window.matchMedia('(hover: none)').matches;
+  const REVEAL_DELAY = isMobile ? 220 : 140;  // telefon: 220ms, desktop: 140ms
+
+  const wrappersAll = Array.from(document.querySelectorAll('.image-wrapper'));
+  // Stran s fotografijami
+  const imgWrappers = wrappersAll.filter(w => w.querySelector('img'));
+
+  if (imgWrappers.length > 0) {
+    // prestavi src -> data-src pri slikah (da se ne naložijo takoj)
+    const allImgs = imgWrappers.flatMap(w => Array.from(w.querySelectorAll('img')));
+    allImgs.forEach(img => {
+      if (!img.dataset.src && img.getAttribute('src')) {
+        img.dataset.src = img.getAttribute('src');
+        img.removeAttribute('src');
+        img.loading = 'lazy';
+      }
+    });
+
+    // skrij
+    imgWrappers.forEach(w => w.classList.add('pending'));
+
+    const firstBatchCount = Math.min(8, imgWrappers.length);
+    const secondBatchCount = Math.min(16, imgWrappers.length);
+
+    sequentiallyLoadTiles(imgWrappers.slice(0, firstBatchCount)).then(async () => {
+      insertDotsLoaderAfter(imgWrappers[firstBatchCount - 1]);
+
+      await sequentiallyLoadTiles(imgWrappers.slice(firstBatchCount, secondBatchCount));
+      removeDotsLoader();
+    });
+
+    // helperji (fotografije)
+    function loadOneImage(img) {
+      return new Promise(resolve => {
+        const done = () => resolve();
+        img.addEventListener('load', done, { once: true });
+        img.addEventListener('error', done, { once: true });
+        img.src = img.dataset.src;
+      });
+    }
+
+    function sequentiallyLoadImages(imgs) {
+      return imgs.reduce((p, img) => p.then(() => loadOneImage(img)), Promise.resolve());
+    }
+
+    async function sequentiallyLoadTiles(tiles) {
+      const items = tiles.map(w => {
+        const mainA = w.querySelector('a[data-fancybox]:first-child');
+        const img = mainA ? mainA.querySelector('img') : w.querySelector('img');
+        return { wrapper: w, img };
+      }).filter(x => x.img);
+
+      for (const x of items) {
+        await loadOneImage(x.img);
+        x.wrapper.classList.remove('pending');
+        x.wrapper.classList.add('fade-in');
+        await new Promise(r => setTimeout(r, REVEAL_DELAY)); // ← droben zamik med ploščicami
+      }
+    }
+
+    // lazy za thumbs v odprti skupini
+    document.querySelectorAll('.image-wrapper > a[data-fancybox]:first-child').forEach(a => {
+      a.addEventListener('click', () => {
+        const group = a.getAttribute('data-fancybox');
+        if (!group) return;
+        const groupAnchors = Array.from(document.querySelectorAll(`a[data-fancybox="${group}"]`));
+        const thumbsToLoad = groupAnchors
+          .map(x => x.querySelector('img'))
+          .filter(img => img && img.dataset && img.dataset.src && !img.getAttribute('src'));
+        sequentiallyLoadImages(thumbsToLoad);
+      }, { once: true });
+    });
+
+    let dotsEl = null;
+    function insertDotsLoaderAfter(wrapper) {
+      if (!wrapper) return;
+      dotsEl = document.createElement('div');
+      dotsEl.className = 'dots-loader';
+      dotsEl.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      const section = wrapper.closest('.section') || document.querySelector('.section');
+      if (section) wrapper.insertAdjacentElement('afterend', dotsEl);
+    }
+    function removeDotsLoader() {
+      if (dotsEl && dotsEl.parentNode) dotsEl.parentNode.removeChild(dotsEl);
+      dotsEl = null;
+    }
+
+    return; // končaj vejo za foto stran
+  }
+
+  // ===== VIDEO STRAN (video.html) – če NI <img>, pa SO <video> =====
+  const videoWrappers = wrappersAll.filter(w => w.querySelector('video'));
+  if (videoWrappers.length === 0) return;
+
+  // skrij vse video ploščice
+  videoWrappers.forEach(w => w.classList.add('pending'));
+
+  // prikaži jih z istim “stagger” efektom (ne silimo brskalnika, da naloži video – imamo preload="metadata")
+  (async () => {
+    for (const w of videoWrappers) {
+      w.classList.remove('pending');
+      w.classList.add('fade-in');
+      await new Promise(r => setTimeout(r, REVEAL_DELAY));
+    }
+  })();
+})();
