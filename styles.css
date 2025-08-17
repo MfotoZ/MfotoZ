@@ -82,28 +82,37 @@ nav a:hover {
 }
 
 /* Galerija */
+/* Galerija — čist CSS Grid, brez inline-block in fiksnih širina */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
 }
 
-
-.image-wrapper {
+.gallery .image-wrapper {
   position: relative;
-  display: inline-block;
+  display: block;        /* grid item */
+  width: 100%;           /* naj zapolni grid celico */
   overflow: hidden;
-  width: 24%;       /* prej 26% → zdaj 4 stolpci */
-  margin-bottom: 6px;
-  vertical-align: top;
+  margin: 0;             /* razmik ureja grid gap */
+  vertical-align: top;   /* ne vpliva več, a harmless */
 }
 
-.image-wrapper img {
+.gallery img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
 }
+
+/* Responsivnost za galerijo */
+@media (max-width: 900px) {
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: 1fr; }
+}
+
 
 .image-wrapper video {
   width: 100%;
@@ -123,6 +132,7 @@ nav a:hover {
   opacity: 0;
   transition: opacity 0.6s ease;
   z-index: 1;
+  pointer-events: none; /* <-- dodaj to, da overlay ne prestreza tapov */
 }
 
 .image-wrapper:hover::before {
@@ -734,8 +744,6 @@ body {
 }
 
 
-
-
 .category-submenu a {
   color: white;
   text-decoration: none;
@@ -867,5 +875,204 @@ nav a.active::after {
 @media (hover: none) {
   .image-wrapper.hiding { 
     transition: opacity .7s ease;        /* bilo .55s – malo počasneje */
+  }
+}
+
+@media (min-width: 701px) {
+  /* logotip + ikone povečane (kot prej) */
+  .header-left .logo img {
+    height: 90px;
+  }
+  .header-left .icon {
+    width: 30px;
+    height: 30px;
+  }
+  .header-left {
+    gap: 1.25rem;
+  }
+
+  /* desni meni – prisilno ohrani velikost in poravnavo */
+  .header-right a {
+    font-size: 1rem;         /* ostane kot prej */
+    line-height: 1.2;        /* ne raztegne višine */
+    padding: 0;              /* odstrani dodatno vertikalno padding */
+    display: inline-flex;
+    align-items: center;     /* centrira besedilo v višini headerja */
+  }
+
+  /* container naj poravna elemente na sredino */
+  .container {
+    align-items: center;
+  }
+
+  header {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+}
+
+/* Samo sekcija, ki vsebuje .gallery (index) – raztegni čez celo širino,
+   levi notranji rob ostane 2rem (poravnano z headerjem), desnega zmanjšamo */
+@media (min-width: 901px) {
+  .section:has(.gallery) {
+    max-width: none;     /* ni več centriran box */
+    margin: 0;           /* brez auto centriranja */
+    padding-left: 2rem;  /* ohrani levi rob kot v headerju */
+    padding-right: 1rem; /* "pojej" desni rob */
+  }
+}
+
+
+/* 1) Index sekcija z galerijo: ohrani levi rob, desnega malo "pojej" */
+@media (min-width: 901px) {
+  .section:has(.gallery) {
+    max-width: none;     /* raztegni čez širino okna */
+    margin: 0;
+    padding-left: 2rem;  /* poravnano z headerjem */
+    padding-right: 0.5rem; /* manj desnega roba */
+  }
+}
+
+/* 2) Naj grid res upravlja postavitev ploščic (preglasi 24%) */
+@media (min-width: 901px) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 stolpci na desktopu */
+    gap: 6px;
+  }
+  .gallery .image-wrapper {
+    width: 100% !important;     /* preglasi globalnih 24% */
+    display: block !important;  /* grid item naj bo “block” */
+    margin: 0;                  /* brez dodatnega spodnjega roba */
+  }
+}
+
+/* responsivnost (isti “look” kot prej) */
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .gallery .image-wrapper {
+    width: 100% !important;
+  }
+}
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .gallery .image-wrapper {
+    width: 100% !important;
+  }
+}
+
+/* VIDEO stran: naj se .section obnaša kot grid in naj "poje" desni rob */
+@media (min-width: 901px) {
+  /* 1) razteg + robovi, enako kot na indexu */
+  .section:has(.image-wrapper video) {
+    max-width: none;
+    margin: 0;
+    padding-left: 2rem;   /* poravnano z headerjem */
+    padding-right: 0.5rem;/* malo manj desno */
+  }
+
+  /* 2) .section naj bo grid (na video.html nimamo .gallery) */
+  .section:has(.image-wrapper video) {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 stolpci na desktopu */
+    gap: 6px;
+  }
+
+  /* 3) ploščice naj ne držijo globalnega width:24% */
+  .section:has(.image-wrapper video) .image-wrapper {
+    width: 100% !important;
+    display: block !important;
+    margin: 0;
+  }
+
+  /* 4) video naj lepo zapolni ploščico */
+  .section:has(.image-wrapper video) .image-wrapper video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;       /* kot že uporabljaš inline */
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* Responsivnost, isto logiko kot pri fotkah */
+@media (max-width: 900px) {
+  .section:has(.image-wrapper video) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .section:has(.image-wrapper video) {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .header-right a {
+    font-size: 1.4rem; /* povečaj samo pisavo */
+    line-height: 1.2;  /* ohrani višino headerja */
+    padding: 0;        /* brez dodatnega razmika */
+  }
+}
+
+/* Desktop poravnava bolj levo */
+@media (min-width: 901px) {
+  header {
+    padding-left: 1rem; /* prej 2rem */
+  }
+
+  .section:has(.gallery) {
+    padding-left: 1rem; /* prej 2rem */
+  }
+}
+
+
+
+/* ker z zgornjim flexom ne potrebujemo inline-block */
+.image-wrapper {
+  display: block;      /* namesto inline-block */
+  margin-bottom: 0;    /* razmik zdaj uravnava gap na parentu */
+}
+
+/* širine po tvojem sistemu še vedno delajo */
+.image-wrapper.full    { width: 100%; }
+.image-wrapper.half    { width: 48%; }
+.image-wrapper.quarter { width: 24%; }
+
+@media (max-width: 900px) {
+  .image-wrapper.half,
+  .image-wrapper.quarter { width: 48%; }
+}
+@media (max-width: 600px) {
+  .image-wrapper.full,
+  .image-wrapper.half,
+  .image-wrapper.quarter { width: 98%; }
+}
+
+
+/* Desktop: naj .gallery razporedi ploščice v stolpce (masonry) */
+@media (min-width: 901px) {
+  .gallery {
+    column-count: 4;
+    column-gap: 6px;
+  }
+  .gallery .image-wrapper {
+    width: 100% !important;
+    display: block !important;
+    break-inside: avoid;
+    margin: 0 0 6px 0;
   }
 }
