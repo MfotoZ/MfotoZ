@@ -142,8 +142,7 @@ nav a:hover {
 
 .image-wrapper video {
   width: 100%;
-  height: 100%;
-  aspect-ratio: auto;   /* odstrani fiksno 16/9 */
+  height: auto;
   object-fit: cover;    /* naj zapolni okvir */
   display: block;
 }
@@ -839,9 +838,13 @@ nav a.active::after {
 
 
 
+.image-wrapper {
+  display: block;
+  position: relative;
+  margin: 0;
+}
 
-/* Skrivanje pri filtriranju */
-.image-wrapper { display: block; }
+
 
 /* Mobilno glajenje animacij (iOS Safari & Android) */
 .image-wrapper {
@@ -965,10 +968,13 @@ nav a.active::after {
 
   /* 3) ploščice naj ne držijo globalnega width:24% */
   .section:has(.image-wrapper video) .image-wrapper {
-    width: 100% !important;
-    display: block !important;
-    margin: 0;
-  }
+   width: 100% !important;
+  display: block !important;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;   /* <-- ta vrstica je ključna */
+}
 
   /* 4) video naj lepo zapolni ploščico */
   .section:has(.image-wrapper video) .image-wrapper video {
@@ -1072,3 +1078,9 @@ nav a.active::after {
 .image-wrapper.hidden {
   display: none !important;
 }
+
+.section:has(.image-wrapper video) .image-wrapper { 
+  position: relative; 
+  overflow: hidden; 
+}
+
