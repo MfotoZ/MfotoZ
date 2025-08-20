@@ -9,10 +9,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://github.com">
-  <link rel="preconnect" href="https://objects.githubusercontent.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Antonio:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -55,43 +52,42 @@
 </div>
 
 <main>
-<div class="section">
-
+  <div class="section">
 
     <!-- Poroka Matija in Vesna -->
-<div class="image-wrapper" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Poroka-Matija-Vesna.mp4')">
-  <video muted playsinline preload="metadata" poster="Poroka-Matija-Vesna/Poroka-Matija-Vesna.png"
-         style="width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block;">
-    <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Poroka-Matija-Vesna.mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div class="photo-title">Poroka Matija & Vesna</div>
-</div>
+    <div class="image-wrapper">
+      <a href="#" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Poroka-Matija-Vesna.mp4'); return false;">
+        <video poster="Poroka-Matija-Vesna/Poroka-Matija-Vesna.png" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
+          <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Poroka-Matija-Vesna.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="photo-title">Poroka Matija &amp; Vesna</div>
+      </a>
+    </div>
 
-<!-- Vrhnika -->
- <div class="image-wrapper" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mp4')">
-  <video muted playsinline preload="metadata" poster="Vrhnika/DJI_0242.jpg"
-         style="width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block;">
-    <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
-</div>
+    <!-- Vrhnika -->
+    <div class="image-wrapper">
+      <a href="#" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mp4'); return false;">
+        <video poster="Vrhnika/DJI_0242.jpg" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
+          <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
+      </a>
+    </div>
 
-  <!-- Bowling -->
-<div class="image-wrapper" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Bowling.mp4')">
-  <video muted playsinline preload="metadata" poster="Bowling/IMG_0393-Enhanced-NR.jpg"
-         style="width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block;">
-    <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Bowling.mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div class="photo-title">Bowling</div>
-</div>
+    <!-- Bowling -->
+    <div class="image-wrapper">
+      <a href="#" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Bowling.mp4'); return false;">
+        <video poster="Bowling/IMG_0393-Enhanced-NR.jpg" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
+          <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Bowling.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="photo-title">Bowling</div>
+      </a>
+    </div>
 
   </div>
-
-</div>
-
 </main>
 
 <!-- CINEMA MODAL -->
@@ -106,9 +102,6 @@
   &copy; 2025 mfotoz.com | Matija Zavasnik
 </footer>
 
-
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.0/dist/fancybox.umd.js"></script>
 <script src="main.js"></script>
-
 </body>
 </html>
