@@ -121,12 +121,26 @@ window.openModal = function (url) {
 
 window.closeModal = function () {
   const m = document.getElementById('videoModal');
-  const v = document.getElementById('modalVideo');
-  v.pause();
-  v.removeAttribute('src'); // počisti, da ne kuri prometa
-  v.load();
-  m.style.display = 'none'; // ali m.classList.remove('open')
+  const vContainer = document.getElementById('modalVideoContainer');
+
+  // počisti vsebino (tudi iframe, če je bil)
+  vContainer.innerHTML = '';
+
+  // vstavi nazaj prazen <video> za lokalne videe (da še vedno delujejo)
+  const video = document.createElement('video');
+  video.id = 'modalVideo';
+  video.controls = true;
+  video.autoplay = true;
+  video.muted = true;
+  video.playsInline = true;
+  video.style.width = '100%';
+  video.style.height = 'auto';
+  vContainer.appendChild(video);
+
+  // skrij modal
+  m.style.display = 'none';
 };
+
 
 
   closeBtn.addEventListener('click', window.closeModal);
@@ -255,3 +269,24 @@ function initFancyboxGalleries() {
     }
   })();
 })();
+
+
+window.openModalYouTube = function (videoId) {
+  const m = document.getElementById('videoModal');
+  const vContainer = document.getElementById('modalVideoContainer');
+
+  // počisti staro vsebino
+  vContainer.innerHTML = '';
+
+  // vstavi YouTube iframe
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+  iframe.setAttribute('allowfullscreen', '');
+  vContainer.appendChild(iframe);
+
+  m.style.display = 'flex';
+};
