@@ -1084,3 +1084,12 @@ nav a.active::after {
   overflow: hidden; 
 }
 
+/* Container za YouTube iframe */
+.modal-content iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* prisili 16:9 okvir */
+  height: auto;
+  display: block;
+}
+
+
