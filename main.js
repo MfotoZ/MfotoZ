@@ -106,11 +106,18 @@ function initVideoModal() {
 window.openModal = function (url) {
   const m = document.getElementById('videoModal');
   const v = document.getElementById('modalVideo');
+
   v.src = url;
   v.load();
-  v.play().catch(() => {});
-  m.style.display = 'flex'; // ali m.classList.add('open') če uporabljaš razred
+
+  // iOS Safari dovoljuje autoplay samo z muted + playsinline
+  v.play().catch(() => {
+    console.log("iOS blokira autoplay – uporabnik mora tapniti play.");
+  });
+
+  m.style.display = 'flex';
 };
+
 
 window.closeModal = function () {
   const m = document.getElementById('videoModal');
