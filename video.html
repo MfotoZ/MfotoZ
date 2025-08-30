@@ -53,38 +53,37 @@
 <main>
   <div class="section">
 
-    <!-- Poroka Matija in Vesna -->
-    <div class="image-wrapper">
-      <a href="#" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Poroka-Matija-Vesna.mp4'); return false;">
-        <video poster="Poroka-Matija-Vesna/Poroka-Matija-Vesna.png" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
-          <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Poroka-Matija-Vesna.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="photo-title">Poroka Matija &amp; Vesna</div>
-      </a>
-    </div>
+<!-- Poroka Matija in Vesna (YouTube) -->
+<div class="image-wrapper">
+  <a href="#" onclick="openModalYouTube('5tnozWnQDII'); return false;">
+    <video poster="Poroka-Matija-Vesna/Poroka-Matija-Vesna.png" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;"></video>
+    <img src="Poroka-Matija-Vesna/Poroka-Matija-Vesna.png" 
+         alt="Poroka Matija & Vesna" 
+         style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
+    <div class="photo-title">Poroka Matija &amp; Vesna</div>
+  </a>
+</div>
 
-    <!-- Vrhnika -->
-    <div class="image-wrapper">
-      <a href="#" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mp4'); return false;">
-        <video poster="Vrhnika/DJI_0242.jpg" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
-          <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Vrhnika.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
-      </a>
-    </div>
 
-    <!-- Bowling -->
-    <div class="image-wrapper">
-      <a href="#" onclick="openModal('https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Bowling.mp4'); return false;">
-        <video poster="Bowling/IMG_0393-Enhanced-NR.jpg" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
-          <source src="https://github.com/MfotoZ/MfotoZ/releases/download/v1-video/Bowling.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <div class="photo-title">Bowling</div>
-      </a>
-    </div>
+<!-- Vrhnika -->
+<div class="image-wrapper">
+  <a href="#" onclick="openModalYouTube('fi9Z6GlN7KE'); return false;">
+     <video poster="Vrhnika/DJI_0242.jpg" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;"></video>
+    <img src="https://img.youtube.com/vi/fi9Z6GlN7KE/0.jpg" alt="Otvoritev Rokodelskega doma Vrhnika" style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
+    <div class="photo-title">Otvoritev Rokodelskega doma Vrhnika</div>
+  </a>
+</div>
+
+<!-- Bowling -->
+<div class="image-wrapper">
+  <a href="#" onclick="openModalYouTube('McQetBw9htU'); return false;">
+    <video poster="Bowling/IMG_0393-Enhanced-NR.jpg" preload="metadata" muted playsinline style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;"></video>
+    <img src="https://img.youtube.com/vi/McQetBw9htU/0.jpg" alt="Bowling" style="width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;">
+    <div class="photo-title">Bowling</div>
+  </a>
+</div>
+
+
 
   </div>
 </main>
@@ -93,9 +92,12 @@
 <div id="videoModal" class="modal">
   <div class="modal-content">
     <button class="close-btn" onclick="closeModal()">✕</button>
-    <video id="modalVideo" controls autoplay muted playsinline></video>
+    <div id="modalVideoContainer">
+      <video id="modalVideo" controls autoplay muted playsinline style="width:100%; height:auto;"></video>
+    </div>
   </div>
 </div>
+
 
 <footer>
   &copy; 2025 mfotoz.com | Matija Zavasnik
