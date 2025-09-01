@@ -152,7 +152,7 @@ function initFancyboxGalleries() {
   if (typeof Fancybox === 'undefined') return;
   Fancybox.bind('[data-fancybox]', {
     Toolbar: {
-      display: ['zoom','slideshow','fullscreen','thumbs','close']
+       display: ['counter','zoom','slideshow','fullscreen','thumbs','close']
     },
     Thumbs: { autoStart: true }
   });
