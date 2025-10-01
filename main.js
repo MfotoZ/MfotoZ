@@ -188,7 +188,7 @@ function initFancyboxGalleries() {
     const secondBatchCount = Math.min(16, imgWrappers.length);
 
     sequentiallyLoadTiles(imgWrappers.slice(0, firstBatchCount)).then(async () => {
-      insertDotsLoaderAfter(imgWrappers[firstBatchCount - 1]);
+      
 
       await sequentiallyLoadTiles(imgWrappers.slice(firstBatchCount, secondBatchCount));
       removeDotsLoader();
