@@ -22,8 +22,9 @@ function initCategoryFilter() {
       
       // Filtriraj — namesto inline display uporabljamo CSS razred .hidden (ki ima !important v CSS)
       images.forEach(image => {
-        const match = (category === 'all') || (image.getAttribute('data-category') === category);
-        image.classList.toggle('hidden', !match);
+const match =
+  category === 'all' ||
+  image.getAttribute('data-category').split(" ").includes(category);        image.classList.toggle('hidden', !match);
       });
     });
   });
