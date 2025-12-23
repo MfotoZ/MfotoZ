@@ -120,6 +120,23 @@ nav a:hover {
   .gallery { grid-template-columns: 1fr; }
 }
 
+/* Dodatne prilagoditve za mobilne naprave */
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr; /* Ena slika na vrstico */
+    gap: 4px; /* Manjši razmik med slikami */
+  }
+
+  .gallery .image-wrapper {
+    width: 100%; /* Poskrbi, da slike zapolnijo celotno širino */
+  }
+
+  .gallery img {
+    width: 100%; /* Prilagodi širino slik */
+    height: auto; /* Ohrani razmerje stranic */
+  }
+}
+
 /* Skrivanje med filtriranjem */
 .image-wrapper.hiding {
   display: none;
@@ -549,6 +566,11 @@ footer {
   .modal-content {
     width: 95%;
   }
+}
+
+/* Popravek za mobilne naprave - preprečevanje horizontalnega drsenja */
+body {
+  overflow-x: hidden; /* Prepreči horizontalno drsenje */
 }
 
 /* Prepreči horizontalni scroll */
@@ -1090,6 +1112,47 @@ nav a.active::after {
   aspect-ratio: 16 / 9;   /* prisili 16:9 okvir */
   height: auto;
   display: block;
+}
+
+.gallery-link {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-align: center; /* Sredinska poravnava */
+  display: block; /* Omogoči večvrstično besedilo */
+  line-height: 1.4; /* Razmik med vrsticami */
+  max-width: 200px; /* Omeji širino za prelom */
+  margin: 0 auto; /* Sredinska poravnava za block element */
+  white-space: normal; /* Omogoči prelom besedila */
+}
+
+.gallery-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.gallery-link:hover::after {
+  width: 100%;
+}
+
+.mobile-menu a.gallery-link {
+  margin-top: 0; /* Odstranjen odmik od ostalih povezav */
+}
+
+@media (max-width: 768px) {
+  .header-center {
+    display: none; /* Skrij 'Your Gallery' v glavi na mobilnih napravah */
+  }
 }
 
 
