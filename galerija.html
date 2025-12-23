@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Zasebni dostop do galerij – mfotoz.com" />
+  <title>MfotoZ – Gallery Access</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Google Fonts (enako kot about.html) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Crimson&family=Cormorant+Garamond:wght@300&family=Antonio:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+
+      <style>
+    /* Osnovni layout */
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .about-contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6rem;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Leva (opis) in desna (kontakt) stran */
+    .about-text,
+    .contact-form {
+      flex: 1 1 300px;
+      /* odstranjeno min-width za boljšo odzivnost */
+    }
+
+    /* TEKST V OPISU */
+    .about-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 2rem auto 0 auto; /* višje odmik od fotografije */
+    font-family: Antonio, sans-serif;
+    font-size: 1.1rem;
+    color: white;
+    }
+
+    .about-text h2 {
+      font-family: 'Crimson', serif;
+      font-size: 3.2rem;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+
+    .about-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .about-text p {
+      font-family: 'Antonio', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: white;
+      line-height: 1.5;
+    }
+
+    /* KONTAKTNI OBRAZEC */
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      margin-top: -1rem;
+    }
+
+    .contact-form label {
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Responsive za manjše ekrane */
+    @media (max-width: 700px) {
+      .about-contact-container {
+        flex-direction: column;
+        padding: 1rem;
+        max-width: 100%;
+      }
+
+      .about-text,
+      .contact-form {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0 1rem;
+        text-align: center;
+        box-sizing: border-box;
+        min-width: auto; /* odstranimo minimalno širino */
+        font-size: 1rem; /* po želji manjša pisava */
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-left">
+      <a href="index.html" class="logo">
+        <img src="logo/mfotoz-logo-spletna-stran.webp" alt="MfotoZ logo" />
+      </a>
+      <a href="https://instagram.com/m.foto.z" target="_blank">
+        <img src="logo/mfotoz-logo-instagram-bela-brezozadja.webp" alt="Instagram" class="icon" />
+      </a>
+      <a href="https://mail.google.com/mail/?view=cm&to=matijafotoz@gmail.com" target="_blank">
+        <img src="logo/mfotoz-logo-mail-bela-brezozadja.webp" alt="Email" class="icon" />
+      </a>
+    </div>
+
+    <div class="header-center">
+      <a href="galerija.html" class="gallery-link">Your Gallery</a>
+    </div>
+
+    <nav class="header-right">
+      <a href="index.html">PHOTOS</a>
+      <a href="video.html">VIDEOS</a>
+      <a href="about.html">ME</a>
+    </nav>
+
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu-overlay" aria-hidden="true">
+  <nav class="mobile-menu">
+    <a href="index.html">PHOTOS</a>
+    <a href="video.html">VIDEOS</a>
+    <a href="about.html">ME</a>
+    <a href="galerija.html" class="gallery-link">Your Gallery</a>
+  </nav>
+</div>
+
+<main>
+
+  <section class="section">
+    <div class="about-contact-container">
+
+      <!-- Tekst – ENAK STIL KOT ABOUT -->
+<div class="about-text">
+  <h2>Private Gallery Access</h2>
+  <h3>Enter your personal access code</h3>
+
+  <p style="text-align:center;">
+    This gallery is protected and available only to selected clients.
+    Please enter the access code you received via email to continue.
+  </p>
+
+  <!-- Centerirana forma -->
+  <form id="code-form" style="margin-top:2.5rem; text-align:center;">
+
+    <label for="accessCode" style="display:block; margin-bottom:0.6rem;">
+      Access code
+    </label>
+
+    <input
+      type="password"
+      id="accessCode"
+      autocomplete="off"
+      required
+      style="
+        width: 100%;
+        max-width: 320px;
+        padding: 0.7rem;
+        font-size: 1.1rem;
+        background-color: #171717;
+        color: white;
+        border: 1px solid white;
+        border-radius: 4px;
+        text-align: center;
+      "
+    />
+
+    <br /><br />
+
+    <button
+      type="submit"
+      style="
+        padding: 0.9rem 2.4rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      "
+      onmouseover="this.style.backgroundColor='#171717'; this.style.color='white'; this.style.borderColor='white';"
+      onmouseout="this.style.backgroundColor='white'; this.style.color='black'; this.style.borderColor='black';"
+    >
+      Enter Gallery
+    </button>
+
+    <p id="code-error"
+       style="color:#ff6b6b; display:none; margin-top:1rem;">
+      Invalid code. Please try again.
+    </p>
+
+  </form>
+</div>
+
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 mfotoz.com | Matija Zavasnik
+</footer>
+
+<script src="main.js"></script>
+
+</body>
+</html>
