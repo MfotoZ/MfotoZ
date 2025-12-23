@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initVideoModal();
   initFancyboxGalleries();
   initCategoryFilter();
+  initMaskedInput();
+  initCodeAccess();
 });
 
 /** Hamburger meni **/
@@ -291,3 +293,102 @@ window.openModalYouTube = function (videoId) {
 
   m.style.display = 'flex';
 };
+
+function initCodeAccess() {
+  const form = document.getElementById('code-form');
+  if (!form) return;
+
+  const input = document.getElementById('accessCode');
+  const errorEl = document.getElementById('code-error');
+
+  const codeMap = {
+    'DemoTeamSlovenia': 'https://mfotoz19.pixieset.com/demoteamslovenia/',
+    'GolfGTD': 'https://mfotoz19.pixieset.com/golfgtd/'
+  };
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const code = input.getRealValue
+      ? input.getRealValue().trim()
+      : input.value.trim();
+
+    if (codeMap[code]) {
+      errorEl.style.display = 'none';
+      window.location.href = codeMap[code];
+    } else {
+      errorEl.style.display = 'block';
+    }
+  });
+}
+
+
+function initMaskedInput() {
+  const input = document.getElementById('accessCode');
+  if (!input) return;
+
+  let realValue = '';
+  let maskTimeout = null;
+
+  input.addEventListener('input', () => {
+    // če briše
+    if (input.value.length < realValue.length) {
+      realValue = realValue.slice(0, input.value.length);
+    } else {
+      const newChar = input.value.slice(-1);
+      realValue += newChar;
+    }
+
+    // prikažemo: pike + zadnja črka
+    const masked =
+      '•'.repeat(Math.max(0, realValue.length - 1)) +
+      realValue.slice(-1);
+
+    input.value = masked;
+
+    // po 2 sekundah tudi zadnja črka postane pika
+    clearTimeout(maskTimeout);
+    maskTimeout = setTimeout(() => {
+      input.value = '•'.repeat(realValue.length);
+    }, 2000);
+  });
+
+  // omogoči, da submit uporablja pravo vrednost
+  input.getRealValue = () => realValue;
+}
+
+/** Prikaz prve črke v polju za geslo **/
+function initPasswordField() {
+  const passwordField = document.getElementById('accessCode');
+
+  if (!passwordField) return;
+
+  let timeoutId;
+  let lastValue = '';
+
+  passwordField.addEventListener('input', () => {
+    clearTimeout(timeoutId);
+
+    const currentValue = passwordField.value;
+
+    if (currentValue.length > lastValue.length) {
+      // Nova črka je dodana
+      const visibleChar = currentValue.slice(-1); // Zadnja črka
+      passwordField.type = 'text';
+      passwordField.value = currentValue;
+
+      timeoutId = setTimeout(() => {
+        passwordField.type = 'password';
+      }, 2000);
+    } else {
+      // Črka je odstranjena
+      passwordField.type = 'password';
+    }
+
+    lastValue = passwordField.value;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initPasswordField();
+});
