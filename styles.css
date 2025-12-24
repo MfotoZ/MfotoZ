@@ -1151,7 +1151,7 @@ nav a.active::after {
 
 @media (max-width: 768px) {
   .header-center {
-    display: none; /* Skrij 'Your Gallery' v glavi na mobilnih napravah */
+    display: none; /* Skrij 'YOUR GALLERY' v glavi na mobilnih napravah */
   }
 }
 
