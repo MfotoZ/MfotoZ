@@ -393,3 +393,4 @@ function initPasswordField() {
 document.addEventListener('DOMContentLoaded', () => {
   initPasswordField();
 });
+
