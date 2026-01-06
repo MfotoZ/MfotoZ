@@ -331,32 +331,55 @@ function initMaskedInput() {
   let realValue = '';
   let maskTimeout = null;
 
-  input.addEventListener('input', () => {
-    // če briše
-    if (input.value.length < realValue.length) {
-      realValue = realValue.slice(0, input.value.length);
-    } else {
-      const newChar = input.value.slice(-1);
-      realValue += newChar;
+  // === PASTE PODPORA (Ctrl+V + mobile paste) ===
+  input.addEventListener('paste', e => {
+    e.preventDefault();
+
+    const pastedText = (e.clipboardData || window.clipboardData)
+      .getData('text')
+      .trim();
+
+    if (!pastedText) return;
+
+    realValue += pastedText;
+
+    updateMaskedDisplay();
+  });
+
+  // === TIPKANJE / BRISANJE ===
+  input.addEventListener('input', e => {
+    const value = e.target.value;
+
+    // brisanje
+    if (value.length < realValue.length) {
+      realValue = realValue.slice(0, value.length);
+    }
+    // tipkanje (1 znak)
+    else if (value.length > realValue.length) {
+      realValue += value.slice(realValue.length);
     }
 
-    // prikažemo: pike + zadnja črka
-    const masked =
+    updateMaskedDisplay();
+  });
+
+  function updateMaskedDisplay() {
+    clearTimeout(maskTimeout);
+
+    // pokaži zadnjo črko
+    input.value =
       '•'.repeat(Math.max(0, realValue.length - 1)) +
       realValue.slice(-1);
 
-    input.value = masked;
-
-    // po 2 sekundah tudi zadnja črka postane pika
-    clearTimeout(maskTimeout);
+    // po 2s vse skrij
     maskTimeout = setTimeout(() => {
       input.value = '•'.repeat(realValue.length);
     }, 2000);
-  });
+  }
 
-  // omogoči, da submit uporablja pravo vrednost
+  // omogoči pravi submit
   input.getRealValue = () => realValue;
 }
+
 
 /** Prikaz prve črke v polju za geslo **/
 function initPasswordField() {
