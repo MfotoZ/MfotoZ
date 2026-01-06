@@ -303,7 +303,7 @@ function initCodeAccess() {
 
   const codeMap = {
     'DemoTeamSlovenia': 'https://mfotoz19.pixieset.com/demoteamslovenia/',
-    'BojanŽižek': 'https://mfotoz19.pixieset.com/abrahambojanzizek/',
+    'AbrahamBojan': 'https://mfotoz19.pixieset.com/abrahambojanzizek/',
     'GolfGTD': 'https://mfotoz19.pixieset.com/golfgtd/'
   };
 
@@ -393,4 +393,3 @@ function initPasswordField() {
 document.addEventListener('DOMContentLoaded', () => {
   initPasswordField();
 });
-
