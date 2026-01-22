@@ -304,7 +304,8 @@ function initCodeAccess() {
   const codeMap = {
     'DemoTeamSlovenia': 'https://mfotoz19.pixieset.com/demoteamslovenia/',
     'AbrahamBojan': 'https://mfotoz19.pixieset.com/abrahambojanzizek/',
-    'GolfGTD': 'https://mfotoz19.pixieset.com/golfgtd/'
+    'GolfGTD': 'https://mfotoz19.pixieset.com/golfgtd/',
+    'DemoTeamSloveniaRogla': 'https://mfotoz19.pixieset.com/demoteamrogla/',
   };
 
   form.addEventListener('submit', e => {
