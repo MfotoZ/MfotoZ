@@ -187,15 +187,15 @@ function initFancyboxGalleries() {
     // skrij
     imgWrappers.forEach(w => w.classList.add('pending'));
 
-    const firstBatchCount = Math.min(8, imgWrappers.length);
-    const secondBatchCount = Math.min(16, imgWrappers.length);
+const firstBatchCount = Math.min(8, imgWrappers.length);
+const secondBatchCount = Math.min(16, imgWrappers.length);
 
-    sequentiallyLoadTiles(imgWrappers.slice(0, firstBatchCount)).then(async () => {
-      
+sequentiallyLoadTiles(imgWrappers.slice(0, firstBatchCount)).then(async () => {
+  await sequentiallyLoadTiles(imgWrappers.slice(firstBatchCount, secondBatchCount));
+  await sequentiallyLoadTiles(imgWrappers.slice(secondBatchCount)); // ⬅️ DODANO
+  removeDotsLoader();
+});
 
-      await sequentiallyLoadTiles(imgWrappers.slice(firstBatchCount, secondBatchCount));
-      removeDotsLoader();
-    });
 
     // helperji (fotografije)
     function loadOneImage(img) {
