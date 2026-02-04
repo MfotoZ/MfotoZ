@@ -306,6 +306,7 @@ function initCodeAccess() {
     'AbrahamBojan': 'https://mfotoz19.pixieset.com/abrahambojanzizek/',
     'GolfGTD': 'https://mfotoz19.pixieset.com/golfgtd/',
     'DemoTeamSloveniaRogla': 'https://mfotoz19.pixieset.com/demoteamrogla/',
+    'AbrahamBoris': 'https://mfotoz19.pixieset.com/abrahamborisivancic/',
   };
 
   form.addEventListener('submit', e => {
