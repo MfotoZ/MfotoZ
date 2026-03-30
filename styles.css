@@ -143,6 +143,11 @@ nav a:hover {
 }
 
 
+@media (max-width: 900px) {
+  .gallery img {
+    position: relative;
+  }
+}
 /* Responsivnost za galerijo */
 @media (max-width: 900px) {
   .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -507,10 +512,6 @@ footer {
     width: 100%;
   }
 
-  .gallery {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-  }
 
   .video-gallery {
     padding: 1rem;
@@ -551,6 +552,11 @@ footer {
   }
 }
 
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 480px) {
   /* Logotip še manjši na zelo majhnih zaslonih */
@@ -1206,10 +1212,9 @@ nav a.active::after {
     grid-template-columns: 1fr;
   }
 }
-
 @media (max-width: 700px) {
   .section {
-    padding: 1.5rem 0.4rem;
+    padding: 2rem 1rem;
   }
 }
 
@@ -1224,5 +1229,17 @@ nav a.active::after {
   .gallery {
     column-gap: 4px;
     row-gap: 3.8px;
+  }
+}
+
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr;
   }
 }
