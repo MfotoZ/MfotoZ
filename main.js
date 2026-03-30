@@ -9,8 +9,14 @@ function initCategoryFilter() {
       e.preventDefault();
       
     // 🔥 force load all images before filtering
-document.querySelectorAll('img[data-src]').forEach(img => {
-  img.src = img.dataset.src;
+document.querySelectorAll('.image-wrapper.pending').forEach(wrapper => {
+  wrapper.classList.remove('pending');
+  wrapper.classList.add('loaded');
+
+  const imgs = wrapper.querySelectorAll('img[data-src]');
+  imgs.forEach(img => {
+    img.src = img.dataset.src;
+  });
 });
 
       filterButtons.forEach(btn => btn.classList.remove('active'));
@@ -183,16 +189,31 @@ function initFancyboxGalleries() {
   if (imgWrappers.length > 0) {
     // prestavi src -> data-src pri slikah (da se ne naložijo takoj)
     const allImgs = imgWrappers.flatMap(w => Array.from(w.querySelectorAll('img')));
-    allImgs.forEach(img => {
-      if (!img.dataset.src && img.getAttribute('src')) {
-        img.dataset.src = img.getAttribute('src');
-        img.removeAttribute('src');
-        img.loading = 'lazy';
-      }
-    });
+allImgs.forEach(img => {
+  if (!img.dataset.src && img.getAttribute('src')) {
+
+    // 🔥 MOBILE: pusti src (da se takoj vidi)
+    if (window.innerWidth <= 900) {
+      return;
+    }
+
+    // 🔥 DESKTOP lazy load
+    img.dataset.src = img.getAttribute('src');
+    img.removeAttribute('src');
+    img.loading = 'lazy';
+  }
+});
 
     // skrij
-    imgWrappers.forEach(w => w.classList.add('pending'));
+if (window.innerWidth > 900) {
+  imgWrappers.forEach(w => w.classList.add('pending'));
+} else {
+  // MOBILE → takoj pokaži slike
+  imgWrappers.forEach(w => {
+    w.classList.remove('pending');
+    w.classList.add('loaded');
+  });
+}
 
 const firstBatchCount = Math.min(8, imgWrappers.length);
 const secondBatchCount = Math.min(16, imgWrappers.length);
@@ -205,14 +226,21 @@ sequentiallyLoadTiles(imgWrappers.slice(0, firstBatchCount)).then(async () => {
 
 
     // helperji (fotografije)
-    function loadOneImage(img) {
-      return new Promise(resolve => {
-        const done = () => resolve();
-        img.addEventListener('load', done, { once: true });
-        img.addEventListener('error', done, { once: true });
-        img.src = img.dataset.src;
-      });
+function loadOneImage(img) {
+  return new Promise(resolve => {
+    // 🔥 če ni data-src → NE delaj nič (mobile)
+    if (!img.dataset.src) {
+      resolve();
+      return;
     }
+
+    const done = () => resolve();
+    img.addEventListener('load', done, { once: true });
+    img.addEventListener('error', done, { once: true });
+
+    img.src = img.dataset.src;
+  });
+}
 
     function sequentiallyLoadImages(imgs) {
       return imgs.reduce((p, img) => p.then(() => loadOneImage(img)), Promise.resolve());
@@ -233,7 +261,9 @@ for (const x of items) {
 
   x.wrapper.classList.add('loaded');
 
+if (window.innerWidth > 900) {
   triggerMasonry();
+}
 
   await new Promise(r => setTimeout(r, REVEAL_DELAY));
 }
@@ -435,13 +465,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function applyMasonry() {
+  if (window.innerWidth <= 900) return; // 🔥 DODAJ TO
+
   const grid = document.querySelector('.gallery');
   if (!grid) return;
 
   const items = grid.querySelectorAll('.image-wrapper:not(.hidden)');
 
   const rowHeight = 10;
-  const rowGap =4;
+  const rowGap = 4;
 
   grid.style.gridAutoRows = rowHeight + "px";
 
@@ -464,7 +496,10 @@ window.addEventListener('resize', triggerMasonry);
 
 let masonryTimeout;
 
+
 function triggerMasonry() {
+  if (window.innerWidth <= 900) return;
+
   clearTimeout(masonryTimeout);
   masonryTimeout = setTimeout(applyMasonry, 50);
 }
