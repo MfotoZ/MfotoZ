@@ -92,25 +92,56 @@ nav a:hover {
 /* Galerija — čist CSS Grid, brez inline-block in fiksnih širina */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 4px; /* levo-desno */
+  row-gap: 3.8px;    /* zgoraj-spodaj (manjši) */
 }
 
 .gallery .image-wrapper {
   position: relative;
-  display: block;    /* grid item */
-  width: 100%;       /* zapolni celico */
-  margin: 0;         /* razmik ureja grid gap */
+  width: 100%;
   overflow: hidden;
 }
 
+/* horizontalne */
+.gallery .image-wrapper.landscape {
+  aspect-ratio: 3 / 2;
+}
+
+/* vertikalne */
+.gallery .image-wrapper.portrait {
+  aspect-ratio: 4 / 5;
+}
+
+.image-wrapper:not(.loaded):hover img {
+  transform: none;
+}
 
 .gallery img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
   object-fit: cover;
+
+  transition:
+    filter 0.3s ease,
+    opacity 0.3s ease,
+    transform 0.4s ease;
 }
+
+
+
+/* vertikalne slike */
+.gallery .image-wrapper.portrait {
+  aspect-ratio: 4 / 5;
+}
+
+/* hover zoom (brez layout shift) */
+.image-wrapper:hover img {
+  filter: brightness(1.05);
+}
+
 
 /* Responsivnost za galerijo */
 @media (max-width: 900px) {
@@ -131,10 +162,6 @@ nav a:hover {
     width: 100%; /* Poskrbi, da slike zapolnijo celotno širino */
   }
 
-  .gallery img {
-    width: 100%; /* Prilagodi širino slik */
-    height: auto; /* Ohrani razmerje stranic */
-  }
 }
 
 /* Skrivanje med filtriranjem */
@@ -203,14 +230,6 @@ nav a:hover {
   opacity: 1;
   transform: translate(-50%, -50%) translateY(0);
 }
-
-
-.gallery img {
-  object-fit: cover;
-  transition: filter 0.3s ease, opacity 0.3s ease;
-}
-
-
 
 /* Video galerija */
 .video-gallery {
@@ -858,16 +877,6 @@ nav a.active::after {
   will-change: transform, opacity;
 }
 
-
-
-.image-wrapper {
-  display: block;
-  position: relative;
-  margin: 0;
-}
-
-
-
 /* Mobilno glajenje animacij (iOS Safari & Android) */
 .image-wrapper {
   backface-visibility: hidden;
@@ -937,37 +946,24 @@ nav a.active::after {
   }
 }
 
-/* 2) Naj grid res upravlja postavitev ploščic (preglasi 24%) */
-@media (min-width: 901px) {
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 stolpci na desktopu */
-    gap: 6px;
-  }
-  .gallery .image-wrapper {
-    width: 100% !important;     /* preglasi globalnih 24% */
-    display: block !important;  /* grid item naj bo “block” */
-    margin: 0;                  /* brez dodatnega spodnjega roba */
-  }
-}
 
 /* responsivnost (isti “look” kot prej) */
 @media (max-width: 900px) {
   .gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
+
   .gallery .image-wrapper {
-    width: 100% !important;
+    display: block;
+    margin-bottom: 0;
   }
 }
+
 @media (max-width: 600px) {
   .gallery {
     grid-template-columns: 1fr;
-    gap: 5px;
-  }
-  .gallery .image-wrapper {
-    width: 100% !important;
   }
 }
 
@@ -1068,7 +1064,6 @@ nav a.active::after {
 
 /* Telefoni: izenači robove na index (galerija) z video stranjo */
 @media (max-width: 700px) {
-  /* zmanjša levi/desni rob vsebine z galerijo */
   .section:has(.gallery) {
     padding-left: 1rem;   /* prej 2rem */
     padding-right: 1rem;  /* prej 2rem */
@@ -1151,8 +1146,83 @@ nav a.active::after {
 
 @media (max-width: 768px) {
   .header-center {
-    display: none; /* Skrij 'YOUR GALLERY' v glavi na mobilnih napravah */
+    display: none; /* Skrij 'Private Gallery' v glavi na mobilnih napravah */
   }
 }
 
+.gallery img.portrait {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
 
+@media (max-width: 900px) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .gallery .image-wrapper {
+    display: block; /* reset masonry */
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === DESKTOP: MASONRY === */
+.gallery .image-wrapper {
+  width: 100%;
+}
+
+/* portrait crop */
+.gallery img.portrait {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+
+/* === MOBILE: GRID === */
+@media (max-width: 900px) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .gallery .image-wrapper {
+    display: block;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 1.5rem 0.4rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .gallery {
+    column-gap: 4px;
+    row-gap: 3.8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    column-gap: 4px;
+    row-gap: 3.8px;
+  }
+}
