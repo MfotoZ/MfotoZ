@@ -8,7 +8,11 @@ function initCategoryFilter() {
     button.addEventListener('click', function(e) {
       e.preventDefault();
       
-      // Odstrani aktivni razred iz vseh gumbov
+    // 🔥 force load all images before filtering
+document.querySelectorAll('img[data-src]').forEach(img => {
+  img.src = img.dataset.src;
+});
+
       filterButtons.forEach(btn => btn.classList.remove('active'));
       
       // Doda aktivni razred trenutnemu gumbu
@@ -21,11 +25,14 @@ function initCategoryFilter() {
       const images = document.querySelectorAll('.image-wrapper');
       
       // Filtriraj — namesto inline display uporabljamo CSS razred .hidden (ki ima !important v CSS)
-      images.forEach(image => {
-const match =
-  category === 'all' ||
-  image.getAttribute('data-category').split(" ").includes(category);        image.classList.toggle('hidden', !match);
-      });
+images.forEach(image => {
+  const match =
+    category === 'all' ||
+    image.getAttribute('data-category').split(" ").includes(category);
+
+  image.classList.toggle('hidden', !match);
+});
+
     });
   });
 }
@@ -218,12 +225,18 @@ sequentiallyLoadTiles(imgWrappers.slice(0, firstBatchCount)).then(async () => {
         return { wrapper: w, img };
       }).filter(x => x.img);
 
-      for (const x of items) {
-        await loadOneImage(x.img);
-        x.wrapper.classList.remove('pending');
-        x.wrapper.classList.add('fade-in');
-        await new Promise(r => setTimeout(r, REVEAL_DELAY)); // ← droben zamik med ploščicami
-      }
+for (const x of items) {
+  await loadOneImage(x.img);
+
+  x.wrapper.classList.remove('pending');
+  x.wrapper.classList.add('fade-in');
+
+  x.wrapper.classList.add('loaded');
+
+  triggerMasonry();
+
+  await new Promise(r => setTimeout(r, REVEAL_DELAY));
+}
     }
 
     // lazy za thumbs v odprti skupini
@@ -418,3 +431,40 @@ function initPasswordField() {
 document.addEventListener('DOMContentLoaded', () => {
   initPasswordField();
 });
+
+
+
+function applyMasonry() {
+  const grid = document.querySelector('.gallery');
+  if (!grid) return;
+
+  const items = grid.querySelectorAll('.image-wrapper:not(.hidden)');
+
+  const rowHeight = 10;
+  const rowGap =4;
+
+  grid.style.gridAutoRows = rowHeight + "px";
+
+  items.forEach(item => {
+    item.style.gridRowEnd = "auto";
+
+    const img = item.querySelector('img');
+    if (!img || !img.complete) return;
+
+    const height = img.getBoundingClientRect().height;
+    const span = Math.ceil((height + rowGap + 1) / (rowHeight + rowGap));
+
+    item.style.gridRowEnd = "span " + span;
+  });
+}
+
+window.addEventListener('load', triggerMasonry);
+window.addEventListener('resize', triggerMasonry);
+
+
+let masonryTimeout;
+
+function triggerMasonry() {
+  clearTimeout(masonryTimeout);
+  masonryTimeout = setTimeout(applyMasonry, 50);
+}
