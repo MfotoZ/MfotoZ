@@ -84,7 +84,7 @@ nav a:hover {
 .section {
   max-width: 2100px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 1rem 2rem 4rem 2rem;
   flex: 1;
 }
 
@@ -1224,11 +1224,17 @@ nav a.active::after {
     row-gap: 3.8px;
   }
 }
+@media (max-width: 700px) {
+  .section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
 @media (max-width: 480px) {
   .gallery {
     column-gap: 4px;
-    row-gap: 3.8px;
+    row-gap: 4px;
   }
 }
 
@@ -1243,3 +1249,12 @@ nav a.active::after {
     grid-template-columns: 1fr;
   }
 }
+
+/* 💻 LAPTOP (manjši monitorji) */
+@media (max-width: 1400px) {
+  .gallery {
+    row-gap: 3.9px;   /* 🔥 zmanjša vertikalni gap */
+    column-gap: 4px;
+  }
+}
+/* 📱 MOBILE – slike do roba */
