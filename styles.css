@@ -973,61 +973,6 @@ nav a.active::after {
   }
 }
 
-/* VIDEO stran: naj se .section obnaša kot grid in naj "poje" desni rob */
-@media (min-width: 901px) {
-  /* 1) razteg + robovi, enako kot na indexu */
-  .section:has(.image-wrapper video) {
-    max-width: none;
-    margin: 0;
-    padding-left: 2rem;   /* poravnano z headerjem */
-    padding-right: 0.5rem;/* malo manj desno */
-  }
-
-  /* 2) .section naj bo grid (na video.html nimamo .gallery) */
-  .section:has(.image-wrapper video) {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 stolpci na desktopu */
-    gap: 6px;
-  }
-
-  /* 3) ploščice naj ne držijo globalnega width:24% */
-  .section:has(.image-wrapper video) .image-wrapper {
-   width: 100% !important;
-  display: block !important;
-  margin: 0;
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 3 / 2;   /* <-- ta vrstica je ključna */
-}
-
-  /* 4) video naj lepo zapolni ploščico */
-  .section:has(.image-wrapper video) .image-wrapper video {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;       /* kot že uporabljaš inline */
-    object-fit: cover;
-    display: block;
-  }
-}
-
-/* Responsivnost, isto logiko kot pri fotkah */
-@media (max-width: 900px) {
-  .section:has(.image-wrapper video) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 5px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-@media (max-width: 600px) {
-  .section:has(.image-wrapper video) {
-    grid-template-columns: 1fr;
-    gap: 5px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
 
 @media (min-width: 901px) {
   .header-right a {
@@ -1258,3 +1203,39 @@ nav a.active::after {
   }
 }
 /* 📱 MOBILE – slike do roba */
+
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 4px;
+  row-gap: 4px;
+}
+
+@media (max-width: 900px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
+.video-grid .image-wrapper {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.video-grid video,
+.video-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
