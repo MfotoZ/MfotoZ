@@ -461,25 +461,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function applyMasonry() {
-  if (window.innerWidth <= 900) return; // 🔥 DODAJ TO
+  if (window.innerWidth <= 900) return;
 
   const grid = document.querySelector('.gallery');
   if (!grid) return;
 
   const items = grid.querySelectorAll('.image-wrapper:not(.hidden)');
 
-  const rowHeight = 10;
-  const rowGap = 4;
+  let rowHeight;
+
+  if (window.innerWidth > 1800) {
+    rowHeight = 10;
+  } else if (window.innerWidth > 1200) {
+    rowHeight = 6;
+  } else {
+    rowHeight = 4;
+  }
+
+  const rowGap = 3.8;
 
   grid.style.gridAutoRows = rowHeight + "px";
 
   items.forEach(item => {
     item.style.gridRowEnd = "auto";
 
-    const img = item.querySelector('img');
-    if (!img || !img.complete) return;
+    const height = item.getBoundingClientRect().height;
 
-    const height = img.getBoundingClientRect().height;
     const span = Math.ceil((height + rowGap + 1) / (rowHeight + rowGap));
 
     item.style.gridRowEnd = "span " + span;
