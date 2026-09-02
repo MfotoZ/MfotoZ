@@ -139,7 +139,13 @@ window.closeModal = function () {
   const m = document.getElementById('videoModal');
   const vContainer = document.getElementById('modalVideoContainer');
 
-  // počisti vsebino (tudi iframe, če je bil)
+  // Zapri in uniči YouTube player
+  if (window.youtubePlayer) {
+    window.youtubePlayer.destroy();
+    window.youtubePlayer = null;
+  }
+
+  // Počisti vsebino
   vContainer.innerHTML = '';
 
   // vstavi nazaj prazen <video> za lokalne videe (da še vedno delujejo)
@@ -321,20 +327,94 @@ window.openModalYouTube = function (videoId) {
   const m = document.getElementById('videoModal');
   const vContainer = document.getElementById('modalVideoContainer');
 
-  // počisti staro vsebino
+  if (!m || !vContainer) return;
+
+  // Počisti prejšnjo vsebino
   vContainer.innerHTML = '';
 
-  // vstavi YouTube iframe
-  const iframe = document.createElement('iframe');
-  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-  iframe.style.width = '100%';
-  iframe.style.height = '100%';
-  iframe.setAttribute('frameborder', '0');
-  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-  iframe.setAttribute('allowfullscreen', '');
-  vContainer.appendChild(iframe);
+  // Ustvari container za YouTube player
+  const playerContainer = document.createElement('div');
+  playerContainer.id = 'youtube-player';
+  playerContainer.style.width = '100%';
+  playerContainer.style.aspectRatio = '16 / 9';
 
+  vContainer.appendChild(playerContainer);
+
+  // Odpri modal
   m.style.display = 'flex';
+
+  // Če API še ni naložen, ga naloži
+  if (typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+    window.pendingYouTubeVideoId = videoId;
+
+    if (!document.getElementById('youtube-iframe-api')) {
+      const script = document.createElement('script');
+      script.id = 'youtube-iframe-api';
+      script.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(script);
+    }
+
+    return;
+  }
+
+  createYouTubePlayer(videoId);
+};
+
+
+// Ustvari YouTube player
+function createYouTubePlayer(videoId) {
+  const playerContainer = document.getElementById('youtube-player');
+
+  if (!playerContainer) return;
+
+  window.youtubePlayer = new YT.Player('youtube-player', {
+    videoId: videoId,
+
+    playerVars: {
+      autoplay: 1,
+      rel: 0,
+      modestbranding: 1,
+      playsinline: 1,
+      origin: window.location.origin
+    },
+
+    events: {
+      onReady: function (event) {
+        // Začni predvajanje
+        event.target.playVideo();
+
+        // Zahtevaj čim višjo kakovost
+        event.target.setPlaybackQuality('highres');
+
+        // Ponovno preveri kakovost
+        setTimeout(() => {
+          if (window.youtubePlayer) {
+            window.youtubePlayer.setPlaybackQuality('highres');
+          }
+        }, 1000);
+      },
+
+      onError: function (event) {
+        console.log('YouTube napaka:', event.data);
+
+        // 150 in 101 = YouTube ne dovoli embedded predvajanja
+        if (event.data === 150 || event.data === 101) {
+          window.location.href =
+            `https://www.youtube.com/watch?v=${videoId}`;
+        }
+      }
+    }
+  });
+}
+
+
+// YouTube API pokliče to funkcijo, ko se naloži
+window.onYouTubeIframeAPIReady = function () {
+  if (window.pendingYouTubeVideoId) {
+    const videoId = window.pendingYouTubeVideoId;
+    window.pendingYouTubeVideoId = null;
+    createYouTubePlayer(videoId);
+  }
 };
 
 function initCodeAccess() {
